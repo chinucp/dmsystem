@@ -1,0 +1,35 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Delivery Management System');
+echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<?php echo $this->headMeta(); ?>
+<?php echo $this->headTitle(); ?>
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css');?>
+
+<?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery-1.7.1.min.js'); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl().'/js/global.js'); ?>
+
+<?php //echo $this->headLink()-> ?>
+
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h2>Delivery Management System</h2>
+			<div class="rightBlock"></div>
+		</div>
+		<div id="topMenu">
+		<?php //echo $this->navigation()->menu(); ?>
+		</div>
+		<div id="homeContent">
+		<?php echo $this->layout()->content; ?>
+		</div>
+		<div id="footer">Copyright 2012 - Abc. All Rights Reserved.</div>
+	</div>
+</body>
+</html>

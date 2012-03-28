@@ -1,0 +1,74 @@
+<?php
+$this->title = "Milestones";
+$this->headTitle($this->title);
+?>
+
+<!--
+<div class="optionSelector">
+	<div class="left-column">
+	<label> Select Project: </label> <select name="projects" id="projects">
+		<option value="0">------- Select -------</option>
+		<option value="1">All</option>
+		<option value="1">WDPRO BAR</option>
+		<option value="1">Disney Careers Portal</option>
+		<option value="1">DLR IBC</option>
+		<option value="1">WDW OPS</option>
+	</select>
+	</div>
+	<div class="right-column">
+		<input type="button" name="search" id="search" value="Search" />
+	</div>
+</div> -->
+<div class="subHeaderContainer">
+	<div class="subHeader">View Milestones</div>
+	<div class="right-column">
+		<select name="projects" id="projects">
+			<option value="0">---------------- Select Project ----------------</option>
+			<option value="1">All</option>
+			<option value="1">WDPRO BAR</option>
+			<option value="1">Disney Careers Portal</option>
+			<option value="1">DLR IBC</option>
+			<option value="1">WDW OPS</option>
+		</select>
+		<input type="button" id="search" name="search" value="Search" />
+	</div>
+</div>
+
+<div class="milestones-table">
+	<div class="rowHead">
+		<div class="colsHead widthLargeHead">Milestone</div>
+		<div class="colsHead widthMediumHead">Milestone Type</div>
+		<div class="colsHead widthMediumHead">Project</div>
+		<div class="colsHead widthMediumHead">Start Date</div>
+		<div class="colsHead widthMediumHead">Forecast date</div>
+		<div class="colsHead widthMediumHead">Status</div>
+		<div class="colsHead widthSmallHead">Action</div>
+	</div>
+
+	<?php foreach ($this->milestones as $milestone):?>
+	<div class="row" id="row_<?php echo $this->escape($milestone->id);?>">
+		<div class="cols widthLarge"><?php echo $this->escape($milestone->milestone);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($milestone->milestoneType);?></div>
+		<div class="cols widthMedium"><?php echo "Project Name";?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($milestone->plannedDate);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($milestone->forecastDate);?></div>
+		<div class="cols widthMedium"><?php echo "In Progress";?></div>
+		<div class="colsAction widthSmall"><a href="#">Edit</a></div>
+		<div class="colsAction uiCloseButton widthSmall"></div>
+	</div>
+	<?php endforeach;?>
+
+	<div class="buttonContainer">
+		<input type="button" class="blueButton" name="addMilestones" id="addMilestones" value="Add Milestones" />
+	</div>
+	<div id="dialog-delete-milestone" title="Remove milestone">
+		<p>
+			<span class="ui-icon ui-icon-alert"
+				style="float: left; margin: 0 7px 20px 0;"></span>This item will be
+			permanently deleted and cannot be recovered. Are you sure?
+		</p>
+	</div>
+	<div class="spacer"></div>
+
+</div>
+
