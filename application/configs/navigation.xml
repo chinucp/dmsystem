@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configdata>
 	<nav>
+		<dashboard>
+			<label>Dashboard</label>
+			<uri>/home</uri>
+		</dashboard>
 		<projects>
 			<label>Projects</label>
 			<uri>/projects</uri>
@@ -9,15 +13,9 @@
 				<uri>/projects/add</uri>
 			</addprojects>
 		</projects>
-		
-		<milestones>
-			<label>Milestones</label>
-			<uri>/milestones</uri>
-		</milestones>
-		
-		<members>
-			<label>Members</label>
-			<uri>/members</uri>
-		</members>
+		<users>
+			<label>Users</label>
+			<uri>/users</uri>
+		</users>
 	</nav>
 </configdata>

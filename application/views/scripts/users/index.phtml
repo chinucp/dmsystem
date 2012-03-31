@@ -1,0 +1,42 @@
+<?php
+$this->title = "View Users";
+$this->headTitle($this->title);
+?>
+<div class="subHeaderContainer">
+	<div class="subHeader">View Users</div>
+</div>
+<div class="table">
+	<form name="users" method="post" action="users">
+		<div class="rowHead">
+			<div class="colsHead widthLargeHead">User Name</div>
+			<div class="colsHead widthMediumHead">User Type</div>
+			<div class="colsHead widthMediumHead">Status</div>
+			<div class="colsHead widthSmallHead">Action</div>
+		</div>
+		<div class="row" id="row_1">
+			<div class="cols widthLarge">Name</div>
+			<div class="cols widthMedium">userType</div>
+			<div class="cols widthMedium">Active</div>
+			<div class="colsAction widthSmall">
+				<a href="users/edit">Edit</a>&nbsp;|&nbsp;<a href="#">View</a>&nbsp;|&nbsp;<a
+					href="#">Delete</a>
+			</div>
+		</div>
+		<div class="row" id="row_2">
+			<div class="cols widthLarge">Name</div>
+			<div class="cols widthMedium">userType</div>
+			<div class="cols widthMedium">InActive</div>
+			<div class="colsAction widthSmall">
+				<a href="users/edit">Edit</a>&nbsp;|&nbsp;<a href="#">View</a>&nbsp;|&nbsp;<a
+					href="#">Delete</a>
+			</div>
+		</div>
+		<br />
+		<div class="buttonContainer">
+			<input type="button" class="blueButton" name="addUser" id="addUser"
+				value="Add User" onclick="document.location='/users/add';" />
+		</div>
+	</form>
+	<div class="spacer"></div>
+</div>
+<br />
