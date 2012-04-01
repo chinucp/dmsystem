@@ -7,10 +7,10 @@ class IndexController extends Zend_Controller_Action {
         $this->_helper->layout->disableLayout();
         $this->_helper->layout->setLayout('loginlayout');
         /*
-         $uri = $this->_request->getPathInfo();
-         $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-         $activeNav = $this->view->navigation()->findByUri($baseUrl.$uri);
-         $activeNav->active = true;
+        $uri = $this->_request->getPathInfo();
+        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $activeNav = $this->view->navigation()->findByUri($baseUrl.$uri);
+        $activeNav->active = true;
          */
     }
 
@@ -21,7 +21,7 @@ class IndexController extends Zend_Controller_Action {
             if ($form->isValid($request->getPost())) {
                 if ($this->_process($form->getValues())) {
                     // We're authenticated! Redirect to the home page
-                    $this->_helper->redirector('index', 'home');
+                    $this->_helper->redirector('index', 'dashboard');
                 }
             } else {
             }

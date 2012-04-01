@@ -1,21 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configdata>
-	<nav>
-		<dashboard>
-			<label>Dashboard</label>
-			<uri>/home</uri>
-		</dashboard>
-		<projects>
-			<label>Projects</label>
-			<uri>/projects</uri>
-			<addprojects>
-				<label>Projects</label>
-				<uri>/projects/add</uri>
-			</addprojects>
-		</projects>
-		<users>
-			<label>Users</label>
-			<uri>/users</uri>
-		</users>
-	</nav>
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+	<nav>		<dashboard>			<label>Dashboard</label>			<uri>/dashboard</uri>		</dashboard>			<projects>			<label>Projects</label>			<uri>/projects</uri>			<addprojects>				<label>Projects</label>				<uri>/projects/add</uri>			</addprojects>		</projects>		<users>			<label>Users</label>			<uri>/users</uri>		</users>
+	</nav>
 </configdata>

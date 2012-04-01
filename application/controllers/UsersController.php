@@ -1,25 +1,25 @@
 <?php
 
-class UsersController extends Zend_Controller_Action {
+class UsersController extends Zend_Controller_Action
+{
 
-    public function init() {
-    }
+	public function init()
+	{	/*
+		$uri = $this->_request->getPathInfo();
+		$activeNav = $this->view->navigation()->findByUri($uri);
+		$activeNav->active = true;
+		*/
+		$uri = $this->_request->getPathInfo();
+		$baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+		$activeNav = $this->view->navigation()->findByUri($baseUrl.$uri);
+		$activeNav->active = true;
+	}
 
-    public function indexAction() {
-        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-        $uri = $this->_request->getPathInfo();
-        $activeNav = $this->view->navigation()->findByUri($baseUrl . $uri);
-        $activeNav->active = true;
-    }
+	public function indexAction()
+	{
+		// action body
+	}
 
-    public function addAction() {
-        $form = new Application_Form_AddUser();
-        $this->view->form = $form;
-    }
 
-    public function editAction() {
-        $form = new Application_Form_AddUser();
-        $this->view->form = $form;
-        $this->render('add');
-    }
 }
+
