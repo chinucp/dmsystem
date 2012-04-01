@@ -8,9 +8,9 @@ echo $this->doctype();
 <head>
 <?php echo $this->headMeta(); ?>
 <?php echo $this->headTitle(); ?>
-<?php //echo $this->baseUrl();exit;?>
-<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')
-							->prependStylesheet($this->baseUrl().'/css/redmond/jquery-ui-1.8.18.custom.css'); ?>
+
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/redmond/jquery-ui-1.8.18.custom.css'); ?>
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/global.css');?>
 
 <?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery-1.7.1.min.js'); ?>
 <?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery-ui-1.8.18.custom.min.js'); ?>

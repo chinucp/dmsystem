@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	
+	
 	var id;
 	$("#dialog:ui-dialog").dialog("destroy");
 	$("#dialog-delete-project").dialog({
@@ -65,5 +67,101 @@ $(document).ready(function() {
 		$("#rviewInfo").show();
 		$("#sviewInfo").hide();
 	});
+	
+	
+	/**
+	 *  Add Project
+	 *  ===============================================
+	 */   
+	 
+	// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+	$( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+	var name = $( "#name" ),
+		email = $( "#email" ),
+		password = $( "#password" ),
+		allFields = $( [] ).add( name ).add( email ).add( password ),
+		tips = $( ".validateTips" );
 
+	function updateTips( t ) {
+		tips
+			.text( t )
+			.addClass( "ui-state-highlight" );
+		setTimeout(function() {
+			tips.removeClass( "ui-state-highlight", 1500 );
+		}, 500 );
+	}
+
+	function checkLength( o, n, min, max ) {
+		if ( o.val().length > max || o.val().length < min ) {
+			o.addClass( "ui-state-error" );
+			updateTips( "Length of " + n + " must be between " +
+				min + " and " + max + "." );
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function checkRegexp( o, regexp, n ) {
+		if ( !( regexp.test( o.val() ) ) ) {
+			o.addClass( "ui-state-error" );
+			updateTips( n );
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	$( "#dialog-form" ).dialog({
+		autoOpen: false,
+		resizable : false,
+		height: 530,
+		width: 590,
+		modal: true,
+		buttons: {
+			"Add Project": function() {
+				
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		close: function() {
+			allFields.val( "" ).removeClass( "ui-state-error" );
+		}
+	});
+	
+	$("#addProjectButton").button().hover(function(){
+		$("#addProjectButton").removeClass("ui-state-hover");
+	});
+
+	$( "#addProjectButton" )
+		.button()
+		.click(function() {
+			$( "#dialog-form" ).dialog( "open" );
+		});
+	
+	$("#addProjectButton").removeClass("ui-button");
+	$("#addProjectButton").removeClass("ui-corner-all");
+	$("#addProjectButton").removeClass("ui-state-default");
+	$("#addProjectButton").removeClass("ui-widget");
+	
+	
+	
+	// Datepickers
+	
+	$(function() {
+		$( "#startDate" ).datepicker();
+	});
+	
+	$(function() {
+		$( "#endDate" ).datepicker();
+	});
+	
+	/**********************************************************************/
+		
+	
+	 
+	 
 });

@@ -436,15 +436,12 @@ select {
 }
 
 .cols {
-	float: left;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: left;
-	
-	/*border-bottom: 1px solid #EBEBEB;*/
-	/*padding: 16px 2px;*/
-	padding:32px 2px 0px 2px;
-	min-height:34px;
+    float: left;
+    font-size: 12px;
+    font-weight: normal;
+    min-height: 16px;
+    padding: 22px 2px 8px;
+    text-align: left;
 }
 
 .widthMedium{
@@ -472,13 +469,11 @@ select {
 }
 
 .colsAction {
-	float: left;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: left;
-	
-	/*border-bottom: 1px solid #EBEBEB;*/
-	padding:16px 0px 0px 0px;
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 20px 0 0;
+    text-align: left;
 }
 
 .uiCloseButton {
@@ -489,7 +484,7 @@ select {
 	width: 15px;
 	cursor: pointer;
 	display: inline-block;
-	margin: -15px 0 0 65px;
+	margin: -16px 0 0 65px;
 	padding: 0;
 	zoom: 1;
 	-webkit-background-clip: padding-box;
@@ -785,17 +780,21 @@ dl dd {
 }
 
 .colsAction a, .rightBlock a{
-	color: #15C;
+	color: #6D84B4;
     cursor: pointer;
     font-size: 12px;
+    font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 }
 
-input[type="text"]{
-	width: 255px;
-	height: 26px;
-	font-size: 15px;
-	direction: ltr;
-	border: 1px solid #CCCCCC;
+input[type="text"] {
+    border: 1px solid #CCCCCC;
+    color: #565669;
+    direction: ltr;
+    font-family: Arial,Verdana,Geneva,sans-serif;
+    font-size: 12px;
+    height: 16px;
+    padding: 4px;
+    width: 255px;
 }
 
 .milestones-table .widthLarge{
@@ -932,3 +931,61 @@ input[type="text"]{
 	margin:0px;
 	width:285px;
 }
+
+.form-label {
+    color: #6D84B4;
+    float: left;
+    font-size: 12px;
+    padding-top: 16px;
+    width: 20%;
+    font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+.form-field {
+    color: #565669;
+    float: left;
+    padding-top: 8px;
+    width: 75%;
+    font-size:12px;
+}
+
+.form-label-textarea {
+    color: #6D84B4;
+    float: left;
+    font-size: 12px;
+    padding-top: 16px;
+    width: 100%;
+    font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+#dialog-form textarea {
+    border: 1px solid #CCCCCC;
+    height: 100px;
+    width: 500px;
+    color: #565669;
+    padding: 3px;
+    font-family: Arial,Verdana,Geneva,sans-serif;
+}
+fieldset {
+    border: 1px solid whitesmoke;
+    margin: 0;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-top: 16px;
+}
+.dialog-form-row{
+	width:100%;
+}
+select {
+    border: 1px solid #CCCCCC !important;
+    color: #565669;
+    font-family: Arial,Verdana,Geneva,sans-serif;
+    height: auto;
+    padding: 3px;
+    width: 264px;
+}
+
+.form-field input#startDate, .form-field input#endDate{
+	width:176px;
+}
+

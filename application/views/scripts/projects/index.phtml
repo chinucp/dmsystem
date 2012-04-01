@@ -6,7 +6,8 @@ $this->headTitle($this->title);
 	<div class="subHeader">View Projects</div>
 </div>
 <div class="table">
-	<form name="projects" method="post" action="projects">
+	<form name="projectAddForm" id="projectAddForm" method="post"
+		action="projects/add">
 		<div class="rowHead">
 			<div class="colsHead widthLargeHead">Project Name</div>
 			<div class="colsHead widthMediumHead">Project Type</div>
@@ -41,35 +42,9 @@ $this->headTitle($this->title);
 		</div>
 		<?php endforeach; ?>
 		<br />
-		<!--
-	<table id="tablesorter-demo" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
-	<thead>
-			<tr>
-				<th class="header headerSortDown">Project Name</th>
-				<th class="header">Project Type</th>
-				<th class="header headerSortUp">Current Milestone</th>
-				<th class="header">Start Date</th>
-				<th class="header">Tentative End date</th>
-				<th class="header">Status</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php foreach ($this->projects as $project) : ?>
-			<tr class="odd">
-				<td><?php echo $this->escape($project->projectName); ?></td>
-				<td><?php echo $this->escape($project->projectType); ?></td>
-				<td><?php echo $this->escape($project->currentMilestone); ?></td>
-				<td><?php echo $this->escape($project->startDate); ?></td>
-				<td><?php echo $this->escape($project->endDate); ?></td>
-				<td>Completed</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
--->
 		<div class="buttonContainer">
-			<input type="button" class="blueButton" name="addProjectBut"
-				id="addProjectBut" value="Add Project" />
+			<input type="button" class="blueButton" name="addProjectButton"
+				id="addProjectButton" value="Add Project" />
 		</div>
 		<!--
 		<div id="dialog-delete-project" title="Remove project">
@@ -80,6 +55,59 @@ $this->headTitle($this->title);
 			</p>
 		</div>
  -->
+		<!-- Add Project Dialog box -->
+		<div id="dialog-form" title="Add new project">
+			<fieldset>
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="projectName">Project Name</label></div>
+				<div class="form-field"><input type="text" name="projectName" id="projectName" class="" /></div>
+			</div>
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="projectType">Project Type</label></div>
+				<div class="form-field"><input type="text" name="projectType" id="projectType" value="" class="" /></div>
+			</div>
+
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="status">Status</label></div>
+				<div class="form-field">
+					<select name="status" id="status">
+                          <option value="1">In progress</option>
+                          <option value="2">On Hold</option>
+                          <option value="3">Completed</option>
+                    </select>
+				</div>
+			</div>
+
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="startDate">Start Date</label></div>
+				<div class="form-field"><input type="text" name="startDate" id="startDate" value="" class="" /></div>
+			</div>
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="endDate">End Date</label></div>
+				<div class="form-field"><input type="text" name="endDate" id="endDate" value="" class="" /></div>
+			</div>
+
+			<div class="dialog-form-row">
+				<div class="form-label"><label for="users">Users</label></div>
+				<div class="form-field">
+					<select name="users" id="users" multiple="multiple" size="3">
+                          <option value="1">Volvo</option>
+                          <option value="2">Saab</option>
+                          <option value="3">Mercedes</option>
+                          <option value="4">Audi</option>
+                          <option value="5">Audi</option>
+                          <option value="6">Audi</option>
+                    </select>
+				</div>
+			</div>
+
+			<div class="dialog-form-row">
+				<div class="form-label-textarea"><label for="description">Description</label></div>
+				<div class="form-field"><textarea name="description" id="description" class=""></textarea></div>
+			</div>
+
+		</fieldset>
+		</div>
 	</form>
 	<div class="spacer"></div>
 </div>
