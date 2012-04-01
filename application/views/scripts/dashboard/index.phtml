@@ -3,17 +3,17 @@ $this->title = "Projects";
 $this->headTitle($this->title);
 ?>
 <div class="subHeaderContainer">
-	<div class="subHeader">View Projects</div>
+	<div class="subHeader">My Dashboard</div>
 </div>
 <div class="table">
 	<form name="projects" method="post" action="projects">
 	<div class="rowHead">
 		<div class="colsHead widthLargeHead">Project Name</div>
 		<div class="colsHead widthMediumHead">Project Type</div>
-		<div class="colsHead widthMediumHead">Current Milestone</div>
-		<div class="colsHead widthMediumHead">Start Date</div>
-		<div class="colsHead widthMediumHead">Tentative End date</div>
-		<div class="colsHead widthMediumHead">Status</div>
+		<div class="colsHead widthMediumHead">Current Release</div>
+		<div class="colsHead widthMediumHead">Current Sprint</div>
+		<div class="colsHead widthMediumHead">Sprint Start Date</div>
+		<div class="colsHead widthMediumHead">Sprint End date</div>
 		<div class="colsHead widthSmallHead">Action</div>
 
 	</div>
@@ -26,7 +26,7 @@ $this->headTitle($this->title);
 		<div class="cols widthMedium"><?php echo $this->escape($project->startDate);?></div>
 		<div class="cols widthMedium"><?php echo $this->escape($project->startDate);?></div>
 		<div class="cols widthMedium">In Progress</div>
-		<div class="colsAction widthSmall"><a href="#">Edit</a></div>
+		<div class="colsAction widthSmall"><a href="#">View</a></div>
 		<div class="colsAction uiCloseButton widthSmall"></div>
 
 	</div>
