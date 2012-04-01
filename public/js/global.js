@@ -121,7 +121,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			"Add Project": function() {
-				
+				$('#projectAddForm').submit();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -147,8 +147,6 @@ $(document).ready(function() {
 	$("#addProjectButton").removeClass("ui-state-default");
 	$("#addProjectButton").removeClass("ui-widget");
 	
-	
-	
 	// Datepickers
 	
 	$(function() {
@@ -160,8 +158,4 @@ $(document).ready(function() {
 	});
 	
 	/**********************************************************************/
-		
-	
-	 
-	 
 });
