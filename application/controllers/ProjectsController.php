@@ -1,27 +1,22 @@
 <?php
 require_once('BaseController.php');
+
 class ProjectsController extends BaseController {
 
     public function init() {
-
     }
 
     public function indexAction() {
-
         // For navigation
         $uri = $this->_request->getPathInfo();
         $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $activeNav = $this->view->navigation()->findByUri($baseUrl . $uri);
         $activeNav->active = true;
-
         // Listing all projects.
         $projects = new Application_Model_ProjectsMapper();
         $this->view->projects = $projects->fetchAll();
-
-        //$db = Zend_Db_Table::getDefaultAdapter();
-        $db = Zend_Registry::get('dbAdapter');
+        $db = Zend_Db_Table::getDefaultAdapter();
         $select = new Zend_Db_Select($db);
-
         // Fetch users
         // TODO get User type dynamically based on user login
         $currentUserType = 1;
@@ -30,16 +25,13 @@ class ProjectsController extends BaseController {
         ))->where("user_types_id > $currentUserType")->order('first_name');
         $users = $db->query($select)->fetchAll();
         $this->view->users = $users;
-
         $select = new Zend_Db_Select($db);
-
         //Fetch Status
         $select->from('project_statuses', array(
             'id', 'status'
         ))->order('sort_order');
         $statuses = $db->query($select)->fetchAll();
         $this->view->statuses = $statuses;
-
         // Fetch Project types.
         $select = new Zend_Db_Select($db);
         $select->from('project_types', array(
@@ -50,9 +42,7 @@ class ProjectsController extends BaseController {
     }
 
     public function addAction() {
-
         $db = Zend_Db_Table::getDefaultAdapter();
-
         // Form submit action. Insert new project.
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -68,12 +58,14 @@ class ProjectsController extends BaseController {
             											`last_updated_date`,
             											`effective_end_date`)
             								VALUES (NULL,
-            											'".$request->projectType."',
-            											'".$request->status."',
-            											'".$request->projectName."',
-            											'".$request->description."',
-            											'".date("Y-m-d", strtotime($request->startDate))."',
-            											'".date("Y-m-d", strtotime($request->endDate))."',
+            											'" . $request->projectType . "',
+            											'" . $request->status . "',
+            											'" . $request->projectName . "',
+            											'" . $request->description . "',
+            											'" . date("Y-m-d", strtotime($request->startDate))
+                            . "',
+            											'" . date("Y-m-d", strtotime($request->endDate))
+                            . "',
             											'1',
             											CURRENT_TIMESTAMP,
             											'0000-00-00'
