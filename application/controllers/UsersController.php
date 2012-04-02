@@ -1,6 +1,6 @@
 <?php
-
-class UsersController extends Zend_Controller_Action
+require_once('BaseController.php');
+class UsersController extends BaseController
 {
 
 	public function init()
@@ -9,6 +9,7 @@ class UsersController extends Zend_Controller_Action
 		$activeNav = $this->view->navigation()->findByUri($uri);
 		$activeNav->active = true;
 		*/
+		parent::init();
 		$uri = $this->_request->getPathInfo();
 		$baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
 		$activeNav = $this->view->navigation()->findByUri($baseUrl.$uri);

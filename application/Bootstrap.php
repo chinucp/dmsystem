@@ -5,6 +5,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * Initializes the Zend Navigation from an XML configuration file.
      */
 
+    protected function _initConfig() {
+        $config = new Zend_Config($this->getOptions());
+        Zend_Registry::set('config', $config);
+        return $config;
+    }
+
     protected function _initNavigation() {
         /*
         $this->bootstrap('layout');
@@ -45,5 +51,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $front = Zend_Controller_Front::getInstance();
         $aclPlugin = new ACC_Controller_Plugin_Acl(new ACC_Controller_Helper_Acl());
         $front->registerPlugin($aclPlugin);
+    }
+
+    protected function _initDBConfig() {
+        $dbAdapter = null;
+        $config = $this->_initConfig();
+        if ($config->resources->db->adapter) {
+            $dbAdapter = Zend_Db::factory($config->resources->db->adapter, $config->resources->db->params);
+            //Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
+        }
+        Zend_Registry::set('dbAdapter', $dbAdapter);
     }
 }

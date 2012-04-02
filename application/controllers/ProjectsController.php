@@ -1,9 +1,8 @@
 <?php
-
-class ProjectsController extends Zend_Controller_Action {
+require_once('BaseController.php');
+class ProjectsController extends BaseController {
 
     public function init() {
-
 
     }
 
@@ -19,7 +18,8 @@ class ProjectsController extends Zend_Controller_Action {
         $projects = new Application_Model_ProjectsMapper();
         $this->view->projects = $projects->fetchAll();
 
-        $db = Zend_Db_Table::getDefaultAdapter();
+        //$db = Zend_Db_Table::getDefaultAdapter();
+        $db = Zend_Registry::get('dbAdapter');
         $select = new Zend_Db_Select($db);
 
         // Fetch users
