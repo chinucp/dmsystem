@@ -3,7 +3,7 @@
 class Application_Model_DashboardMapper {
 
     protected function fetchAll($sql) {
-    	$db = Zend_Registry::get('dbAdapter');
+    	$db = Zend_Db_Table::getDefaultAdapter();
     	$resultant = $db->query($sql);
     	$resultSet = $resultant->fetchAll();
 

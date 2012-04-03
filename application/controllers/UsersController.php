@@ -4,21 +4,27 @@ class UsersController extends BaseController
 {
 
 	public function init()
-	{	/*
-		$uri = $this->_request->getPathInfo();
-		$activeNav = $this->view->navigation()->findByUri($uri);
-		$activeNav->active = true;
-		*/
+	{
 		parent::init();
-		$uri = $this->_request->getPathInfo();
-		$baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-		$activeNav = $this->view->navigation()->findByUri($baseUrl.$uri);
-		$activeNav->active = true;
+
 	}
 
 	public function indexAction()
 	{
-		// action body
+		$viewPageItems = new Application_Model_Db_Users_Mapper();
+
+		$this->view->viewPageItems = $viewPageItems->fetchViewPageItems();
+        print_r($this->view->viewPageItems);
+
+		$this->view->userTypeItems = $viewPageItems->fetchAddPageUserTypeItems();
+        print_r($this->view->userTypeItems);
+
+        $this->view->desigsItems = $viewPageItems->fetchAddPageDesigsItems();
+        print_r($this->view->desigsItems);
+
+        $this->view->desigsItems = $viewPageItems->fetchAddPageRolesItems();
+        print_r($this->view->desigsItems);
+        die;
 	}
 
 

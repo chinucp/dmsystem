@@ -7,11 +7,7 @@ class ProjectsController extends BaseController {
     }
 
     public function indexAction() {
-        // For navigation
-        $uri = $this->_request->getPathInfo();
-        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-        $activeNav = $this->view->navigation()->findByUri($baseUrl . $uri);
-        $activeNav->active = true;
+
         // Listing all projects.
         $projects = new Application_Model_ProjectsMapper();
         $this->view->projects = $projects->fetchAll();
