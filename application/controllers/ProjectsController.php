@@ -4,10 +4,11 @@ require_once('BaseController.php');
 class ProjectsController extends BaseController {
 
     public function init() {
+    	parent::init();
     }
 
     public function indexAction() {
-
+		
         // Listing all projects.
         $projects = new Application_Model_ProjectsMapper();
         $this->view->projects = $projects->fetchAll();
