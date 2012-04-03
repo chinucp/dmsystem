@@ -1,13 +1,16 @@
 <?php
 
 class BaseController extends Zend_Controller_Action {
+	public $authSession;
 
     public function init() {
+    	$this->authSession = new Application_Model_Auth();
     	// selection of navigation menu
     	$this->navigationSelection();
 
     	// check for authectication for each controller call
 		$this->authentication();
+		
 
     }
 
@@ -36,16 +39,15 @@ class BaseController extends Zend_Controller_Action {
     	$auth = Zend_Auth::getInstance();
     	if ($auth->hasIdentity()) {
 			$authData = $auth->getIdentity();
-			$this->setRole($authData->user_types_id);
+			$this->authSession->setRole($authData->user_types_id);
+			$this->authSession->setAuthId($authData->id);
+			$this->authSession->setAuthName($authData->username);
 		}else{
 			// If authentication failed then go to the login page
 			$this->_redirect('/');
 		}
     }
-
-    public function setRole($id){
-		$role = new Zend_Session_Namespace("role");
-		$role->name = 'level'.$id;
-    }
+   
+    
 
 }
