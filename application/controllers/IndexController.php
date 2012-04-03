@@ -15,6 +15,7 @@ class IndexController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+    	$auth = Zend_Auth::getInstance();
         $form = new Application_Form_Login();
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -23,9 +24,12 @@ class IndexController extends Zend_Controller_Action {
                     // We're authenticated! Redirect to the home page
                     $this->_helper->redirector('index', 'dashboard');
                 }
-            } else {
             }
         }
+        // land to the dashboard if user already logged in
+    	if ($auth->hasIdentity()) {
+			$this->_redirect('dashboard');
+		}
         $this->view->form = $form;
     }
 

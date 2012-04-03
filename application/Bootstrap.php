@@ -46,20 +46,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     protected function _initAclControllerPlugin() {
-        $this->bootstrap('frontcontroller');
-        $this->bootstrap('loadAclIni');
         $front = Zend_Controller_Front::getInstance();
         $aclPlugin = new ACC_Controller_Plugin_Acl(new ACC_Controller_Helper_Acl());
         $front->registerPlugin($aclPlugin);
     }
 
-    protected function _initDBConfig() {
-        $dbAdapter = null;
-        $config = $this->_initConfig();
-        if ($config->resources->db->adapter) {
-            $dbAdapter = Zend_Db::factory($config->resources->db->adapter, $config->resources->db->params);
-            //Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
-        }
-        Zend_Registry::set('dbAdapter', $dbAdapter);
-    }
 }
