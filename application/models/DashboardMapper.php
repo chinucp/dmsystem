@@ -12,7 +12,7 @@ class Application_Model_DashboardMapper {
 
     public function fetchProjects(){
 
-			$sql = 'SELECT P.id, PT.type, P.name,P.description, R.release, S.sprint, S.start_date, S.end_date
+			/* $sql = 'SELECT P.id, PT.type, P.name,P.description, R.release, S.sprint, S.start_date, S.end_date
 					FROM `projects` AS P
 					INNER JOIN `releases` AS R ON P.id = R.projects_id
 					INNER JOIN `sprints` AS S ON R.id = S.releases_id
@@ -21,7 +21,7 @@ class Application_Model_DashboardMapper {
 					now( )
 					BETWEEN S.start_date
 					AND S.end_date';
-			return $this->fetchall($sql);
+			return $this->fetchall($sql); */
     }
 	public function fetchRelease(){
 
