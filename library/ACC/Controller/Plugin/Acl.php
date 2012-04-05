@@ -33,6 +33,10 @@ class ACC_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 			}
 		}
 	}
+	public function hasAccess($role,$controller,$action){
+		
+		return $this->_acl->isAllowed($role,$controller,$action);
+	}
 
 	protected function _init($request) {
 		$this->_action = $request->getActionName();
@@ -51,5 +55,7 @@ class ACC_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
 		return $role;
 	}
+	
+	
 
 }

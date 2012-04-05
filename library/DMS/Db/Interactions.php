@@ -64,12 +64,13 @@ class DMS_Db_Interactions
 	 * @access public
 	 *
 	 * @param $dbTable|object
+	 * @param $tableName
 	 * This method closes the current connection and establishes a new connection/sets up new default adapter.
 	 */
-    public function setDbTable($dbTable)
+    public function setDbTable($dbTable, $tableName = null)
     {
         if (is_string($dbTable)) {
-            $dbTable = new $dbTable();
+        	$dbTable = empty($tableName) ? new $dbTable() : new $dbTable($tableName);
         }
         if (!$dbTable instanceof Zend_Db_Table_Abstract) {
             throw new Exception('Invalid table data gateway provided');
@@ -97,65 +98,73 @@ class DMS_Db_Interactions
 	 */
     public function fetchData()
     {
-    	foreach ($this->_fetchQuery as $key => $value) {
-    		$pos = strpos($key, '#');
-    		$key = $pos ? substr($key, 0, $pos) : $key;
-    		switch ($key) {
-	    		case "from":
-	    			if (empty($value)) {
-	    				$select = $this->_dbTable->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
-	    			} else {
-	    				$select = $this->_dbTable->select();
-	    				$select->from($value["tableName"], $value["colsToBFetched"]);
-	    			}
-	    			$select->setIntegrityCheck(false);
-	    			break;
-	    		case "innerJoin":
-	    				$select->joinInner($value["tableName"], $value["condition"], $value["columns"]);
-	    			break;
-	    		case "leftJoin":
-	    				$select->joinLeft($value["tableName"], $value["condition"], $value["columns"]);
-		    		break;
-	    		case "rightJoin":
-		    			$select->joinRight($value["tableName"], $value["condition"], $value["columns"]);
-	    			break;
-	    		case "fullJoin":
-	    				$select->joinFull($value["tableName"], $value["condition"], $value["columns"]);
-	    			break;
-	    		case "crossJoin":
-		    			$select->joinCross($value["tableName"], $value["condition"], $value["columns"]);
-	    			break;
-	    		case "naturalJoin":
-		    			$select->joinNatural($value["tableName"], $value["condition"], $value["columns"]);
-	    			break;
-	    		case "where":
-	    			$select->where($value["condition"]);
-	    			break;
-	    		case "orWhere":
-	    			$select->orWhere($value["condition"]);
-	    			break;
-	    		case "group":
-	    			$select->group($value["column"]);
-	    			break;
-	    		case "order":
-	    			$select->order($value["columns"]);
-	    			break;
-	    		case "limit":
-	    			$select->limit($value["count"], $value["offset"]);
-	    			break;
-	    		case "having":
-	    			$select->having($value["condition"]);
-	    			break;
-	    		default:
-	    			break;
-	    	}
+    	if (empty($this->_fetchQuery)) {
+    		throw new Exception('No query string provided.');
     	}
-
-//        $sql = $select->__toString();
-//		echo "$sql\n";die;
-
-        $rowSet = $this->_dbTable->fetchAll($select);
-
-        return $rowSet;
+    	if (!array_key_exists('queryString', $this->_fetchQuery)) {
+	    	foreach ($this->_fetchQuery as $key => $value) {
+	    		$pos = strpos($key, '#');
+	    		$key = $pos ? substr($key, 0, $pos) : $key;
+	    		switch ($key) {
+		    		case "from":
+		    			if (empty($value)) {
+		    				$select = $this->_dbTable->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+		    			} else {
+		    				$select = $this->_dbTable->select();
+		    				$select->from($value["tableName"], $value["colsToBFetched"]);
+		    			}
+		    			$select->setIntegrityCheck(false);
+		    			break;
+		    		case "innerJoin":
+		    				$select->joinInner($value["tableName"], $value["condition"], $value["columns"]);
+		    			break;
+		    		case "leftJoin":
+		    				$select->joinLeft($value["tableName"], $value["condition"], $value["columns"]);
+			    		break;
+		    		case "rightJoin":
+			    			$select->joinRight($value["tableName"], $value["condition"], $value["columns"]);
+		    			break;
+		    		case "fullJoin":
+		    				$select->joinFull($value["tableName"], $value["condition"], $value["columns"]);
+		    			break;
+		    		case "crossJoin":
+			    			$select->joinCross($value["tableName"], $value["condition"], $value["columns"]);
+		    			break;
+		    		case "naturalJoin":
+			    			$select->joinNatural($value["tableName"], $value["condition"], $value["columns"]);
+		    			break;
+		    		case "where":
+		    			$select->where($value["condition"]);
+		    			break;
+		    		case "orWhere":
+		    			$select->orWhere($value["condition"]);
+		    			break;
+		    		case "group":
+		    			$select->group($value["column"]);
+		    			break;
+		    		case "order":
+		    			$select->order($value["columns"]);
+		    			break;
+		    		case "limit":
+		    			$select->limit($value["count"], $value["offset"]);
+		    			break;
+		    		case "having":
+		    			$select->having($value["condition"]);
+		    			break;
+		    		default:
+		    			break;
+		    	}
+	    	}
+	
+	        /*$sql = $select->__toString();
+	  		echo "$sql\n";die;*/	
+	        $rowSet = $this->_dbTable->fetchAll($select);
+    	} else {
+    		/*echo "$this->_fetchQuery['queryString']\n";die;*/
+    		$stmt = $db->prepare($this->_fetchQuery['queryString']);
+			$stmt->execute();
+			$rowSet = $stmt->fetchAll();
+    	}	
+	    return $rowSet;
     }
 }
