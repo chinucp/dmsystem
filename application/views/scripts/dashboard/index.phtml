@@ -6,77 +6,34 @@ $this->headTitle($this->title);
 	<div class="subHeader">My Dashboard</div>
 </div>
 <div class="table">
-	<form name="projects" method="post" action="projects">
 	<div class="rowHead">
-		<div class="colsHead widthLargeHead">Project Name</div>
+		<div class="colsHead widthMediumHead">Project Name</div>
 		<div class="colsHead widthMediumHead">Project Type</div>
-		<div class="colsHead widthMediumHead">Current Release</div>
-		<div class="colsHead widthMediumHead">Current Sprint</div>
+		<div class="colsHead widthMediumHead">Objective</div>
+		<div class="colsHead widthSmallHead">Current <br />Release</div>
+		<div class="colsHead widthSmallHead">Current <br />Sprint</div>
 		<div class="colsHead widthMediumHead">Sprint Start Date</div>
 		<div class="colsHead widthMediumHead">Sprint End date</div>
 		<div class="colsHead widthSmallHead">Action</div>
 
 	</div>
 
-	<?php foreach ($this->projects as $project):?>
-	<div class="row" id="row_<?php echo $this->escape($project->id);?>">
-		<div class="cols widthLarge"><?php echo $this->escape($project->projectName);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->projectType);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->currentMilestone);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->startDate);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->startDate);?></div>
-		<div class="cols widthMedium">In Progress</div>
-		<div class="colsAction widthSmall"><a href="#">View</a></div>
-		<div class="colsAction uiCloseButton widthSmall"></div>
-
-	</div>
-	<?php endforeach;?>
-	<br />
- <!--
-
-	<table id="tablesorter-demo" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
-	<thead>
-			<tr>
-				<th class="header headerSortDown">Project Name</th>
-				<th class="header">Project Type</th>
-				<th class="header headerSortUp">Current Milestone</th>
-				<th class="header">Start Date</th>
-				<th class="header">Tentative End date</th>
-				<th class="header">Status</th>
-
-			</tr>
-		</thead>
-		<tbody>
-		<?php foreach ($this->projects as $project):?>
-			<tr class="odd">
-				<td><?php echo $this->escape($project->projectName);?></td>
-				<td><?php echo $this->escape($project->projectType);?></td>
-				<td><?php echo $this->escape($project->currentMilestone);?></td>
-				<td><?php echo $this->escape($project->startDate);?></td>
-				<td><?php echo $this->escape($project->endDate);?></td>
-				<td>Completed</td>
-
-			</tr>
-			<?php endforeach;?>
-		</tbody>
-	</table>
--->
-	<!-- -
-	<div class="buttonContainer">
-		<input type="submit" class="blueButton" name="addProject" id="addProject" value="Add Project" />
-
-	</div>
-	-->
-		<div id="dialog-delete-project" title="Remove project">
-			<p>
-				<span class="ui-icon ui-icon-alert"
-					style="float: left; margin: 0 7px 20px 0;"></span>This item will
-				be permanently deleted and cannot be recovered. Are you sure?
-			</p>
-		</div>
-
-	</form>
+	<?php //foreach ($this->projects as $project):?>
+	<!-- <div class="row" id="row_<?php echo $this->escape($project['id']);?>">
+		<div class="cols widthMedium"><?php echo $this->escape($project['name']);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($project['type']);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($project['description']);?></div>
+		<div class="cols widthSmall"><?php echo $this->escape($project['release']);?></div>
+		<div class="cols widthSmall"><?php echo $this->escape($project['sprint']);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($project['start_date']);?></div>
+		<div class="cols widthMedium"><?php echo $this->escape($project['end_date']);?></div>
+		<div class="colsAction widthSmall"><a href="/dashboard/release/<?php echo $this->escape($project['id']);?>">View</a></div>
+	</div> -->
+	<?php //endforeach;?>
+	<?php if(empty($this->projects)):?>
+		<div class="elementContainer">No records available</div>
+	<?php endif;?>
 	<div class="spacer"></div>
 
-</div><br />
+</div>
 

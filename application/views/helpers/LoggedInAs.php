@@ -5,9 +5,9 @@ class Zend_View_Helper_LoggedInAs extends Zend_View_Helper_Abstract {
     public function loggedInAs() {
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-            $username = $auth->getIdentity()->username;
-            $firstName = $auth->getIdentity()->first_name;
-            $lastName = $auth->getIdentity()->last_name;
+            $username = $auth->getIdentity()->dms_users_username;
+            $firstName = $auth->getIdentity()->dms_users_firstname;
+            $lastName = $auth->getIdentity()->dms_users_lastname;
             $logoutUrl = $this->view->url(array(
                 'controller' => 'index', 'action' => 'logout'
             ), null, true);

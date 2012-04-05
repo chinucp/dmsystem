@@ -39,9 +39,9 @@ class BaseController extends Zend_Controller_Action {
     	$auth = Zend_Auth::getInstance();
     	if ($auth->hasIdentity()) {
 			$authData = $auth->getIdentity();
-			$this->authSession->setRole($authData->user_types_id);
-			$this->authSession->setAuthId($authData->id);
-			$this->authSession->setAuthName($authData->username);
+			##$this->authSession->setRole($authData->user_types_id);
+			$this->authSession->setAuthId($authData->dms_users_id);
+			$this->authSession->setAuthName($authData->dms_users_username);
 		}else{
 			// If authentication failed then go to the login page
 			$this->_redirect('/');

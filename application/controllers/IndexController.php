@@ -51,7 +51,7 @@ class IndexController extends Zend_Controller_Action {
     protected function _getAuthAdapter() {
         $dbAdapter = Zend_Db_Table::getDefaultAdapter();
         $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-        $authAdapter->setTableName('users')->setIdentityColumn('username')->setCredentialColumn('password');
+        $authAdapter->setTableName('dms_users')->setIdentityColumn('dms_users_username')->setCredentialColumn('dms_users_password');
         return $authAdapter;
     }
 

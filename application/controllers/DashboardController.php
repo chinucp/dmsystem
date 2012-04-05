@@ -9,7 +9,7 @@ class DashboardController extends BaseController {
     public function indexAction() {
 		$dashboard = new Application_Model_DashboardMapper();
         $this->view->projects = $dashboard->fetchProjects();
-        $this->render('project');
+        
     }
 
   	public function releaseAction() {

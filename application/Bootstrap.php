@@ -46,9 +46,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     protected function _initAclControllerPlugin() {
-        $front = Zend_Controller_Front::getInstance();
-        $aclPlugin = new ACC_Controller_Plugin_Acl(new ACC_Controller_Helper_Acl());
-        $front->registerPlugin($aclPlugin);
+        ##$front = Zend_Controller_Front::getInstance();
+        ##$aclPlugin = new ACC_Controller_Plugin_Acl(new ACC_Controller_Helper_Acl());
+        ##$front->registerPlugin($aclPlugin);      
+        
     }
 
 }
