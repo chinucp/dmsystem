@@ -9,12 +9,12 @@
  */
 
 /**
- * @name Application_Model_Db_Users_Manager
+ * @name Application_Model_Db_Dashboard_Manager
  * @category   Application_Model_Db
  *
  * This class enables to set/get the table fields.
  */
-class Application_Model_Db_Users_Manager extends Application_Model_Db_ManagerMapper
+class Application_Model_Db_Dashboard_Manager extends Application_Model_Db_Dashboard_Mapper
 {
 	/**
      * All the required table field names.
@@ -66,9 +66,76 @@ class Application_Model_Db_Users_Manager extends Application_Model_Db_ManagerMap
 	 *
 	 * @param $options|array|default=null
 	 */
-	public function __construct()
+	public function __construct(array $options = null)
 	{
+		if (is_array($options)) {
+			$this->setOptions($options);
+		}
+	}
 
+	/**
+	 *
+	 * @desc Setting private variable value
+	 * @param string $name
+	 * @param mix $value
+	 * @return object $this
+	 * @access public
+	 */
+	public function __set($name,$value){
+		$name = '_'.$name;
+		if (property_exists($this, $name)) {
+			$this->$name = $value;
+		}
+		return $this;
+	}
+	/**
+	 *
+	 * @desc Getting  private variable value
+	 * @param string $name
+	 * @return  mix [private variable values]
+	 * @access public
+	 */
+	public function __get($name){
+		$name = '_'.$name;
+		if (property_exists($this, $name)) {
+			return $this->$name;
+		}
+	}
+
+	/**
+	 *
+	 * @desc Calling to the getter methods and setter methods
+	 * @param string $name
+	 * @param mix $value
+	 * @return mix [get methodname]
+	 * @access public
+	 */
+	public function __call($name,$value='') {
+		// check the name start with either get or set
+		$request = substr($name,0,3);
+		// get the full string starts with get or set
+		$attr = lcfirst(substr($name,3));
+		if($request == 'get'){
+			return $this->$attr;
+		}
+		if($request == 'set'){
+			$this->$attr = $value[0];
+		}
+	}
+
+	/**
+	 * @name setOptions
+	 * @access public
+	 *
+	 * @param $options|array
+	 * This method calls all the set methods in the array key.
+	 */
+	public function setOptions(array $options)
+	{
+		foreach ($options as $name => $value) {
+			$name = lcfirst(str_replace(' ','',ucwords(str_replace('_', ' ', $name))));
+			$this->$name=$value;
+		}
 	}
 
 

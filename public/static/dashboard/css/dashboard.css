@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+#columns p {
+    margin: 10px 0;
+}
+.table{
+	margin-top:0;
+}
+.widthLArgeHead {
+    width: 150px;
+}
+.widthMediumHead {
+    width: 120px;
+}
+.widthSmallHead {
+    width: 50px;
+}
+.rowHead {
+	 min-height: 20px;
+	 text-align: center;
+
+}
+.colsHead {
+	font-size:13px;
+    font-weight: bold;
+    text-align: left;
+
+}

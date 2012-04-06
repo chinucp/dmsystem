@@ -1,74 +1,69 @@
-<?php 
-ob_clean();//
-ob_end_clean();
-ob_start();
-
-// Some data
-$datay = array(28,19,18,23);
-$datax=array("Careers Portal","WDW","DCL","DLR");
-$data2y = array(14,18,33,29);
-$data3y = array(14,20,15,25);
-
-// A nice graph with anti-aliasing
-$graph = new Graph(800,600);
-$graph->img->SetMargin(40,180,40,40);	
-$graph->SetMarginColor('white');
-$graph->SetBox(true);
-//$graph->SetBackgroundImage("tiger_bkg.png",BGIMG_FILLPLOT);
-
-$graph->img->SetAntiAliasing("white");
-$graph->SetScale("textlin");
-//$graph->SetShadow();
-$graph->title->Set("Projects Line Graph");
-
-// Use built in font
-$graph->title->SetFont(FF_FONT1,FS_BOLD);
-
-// Slightly adjust the legend from it's default position in the
-// top right corner. 
-//$graph->legend->Pos(0.05,0.5,"right","center");
-
-// Create the first line
-$p1 = new LinePlot($datay);
-$p1->mark->SetType(MARK_FILLEDCIRCLE);
-$p1->mark->SetFillColor("blue");
-$p1->mark->SetWidth(5);
-$p1->SetColor("blue");
-$p1->SetCenter();
-$p1->SetLegend("Stories");
-$graph->Add($p1);
-
-// ... and the second
-$p2 = new LinePlot($data2y);
-$p2->mark->SetType(MARK_FILLEDCIRCLE);
-$p2->mark->SetFillColor("red");
-$p2->mark->SetWidth(5);
-$p2->SetColor("red");
-$p2->SetCenter();
-$p2->SetLegend("Hours");
-$graph->Add($p2);
-
-//.. the third here
-$p3 = new LinePlot($data3y);
-$p3->mark->SetType(MARK_FILLEDCIRCLE);
-$p3->mark->SetFillColor("green");
-$p3->mark->SetWidth(5);
-$p3->SetColor("green");
-$p3->SetCenter();
-$p3->SetLegend("Defects");
-$graph->Add($p3);
-//$graph->xaxis->SetTickLabels("Careers Portal","WDW","DCL","DLR");
-// Output line
-$graph->xaxis->SetTickLabels($datax); 
-$graph->legend->SetMarkAbsSize(6);
-//$graph->StrokeCSIM();
-
-// Display the graph
-$graph->Stroke();
-
-
-
-ob_end_flush();
-exit;
-
+<?php
+	$barDatax=array("Careers Portal","WDW","DCL","DLR");
+	$barDatay=array(120,300,90,75);
+	$barTitleArr = array(
+		'x'=>"Projects --->",  // x axis title
+		'y'=>"No. of Story Points --->", // y axis title
+		'm'=>"Projectwise Story Points" // main title
+	);
+	$fileName = Application_Model_Util::graphFileName('storygraph');
+	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
+	
 ?>
+<a name="st" href="#"></a>
+THE BAR GRAPH DEPICTING PROJECT-STORIES MAPPING
+<br /> 
+
+<img src="<?php echo '../tmp/'.$barGrph; ?>" alt="The work begins here...." /> 
+
+
+
+
+
+
+
+<hr/>
+<a name="ln" href="#"></a>
+THE LINE GRAPH DEPICTING PROJECT-STORIES,HRS,DEFECTS MAPPING
+<br /> 
+<?php 
+	$lineDatax=array("Careers Portal","WDW","DCL","DLR");
+	$lineDatay = array(
+		"Stories"=> array("blue",array(28,19,18,23)),
+		"Hours"=> array("red",array(14,18,33,29)),
+		"Defects"=> array("green",array(14,20,15,25))
+	);
+	$lineTitleArr = array( 
+		'm'=>"Projects Line Graph" // main title
+	); // if reqd x and y titles can be set
+	$fileName = Application_Model_Util::graphFileName('linegraph');
+	$lnGrph = $this->drawLineGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
+?>
+
+<img src="<?php echo '../tmp/'.$lnGrph; ?>" alt="The work begins here...." />
+
+
+
+
+
+
+
+
+<hr/>
+<a name="hr" href="#"></a>
+THE BAR GRAPH DEPICTING PROJECT-HRS MAPPING
+
+<?php
+	$barDatax=array("Careers Portal","WDW","DCL","DLR");
+	$barDatay=array(30,20,50,35);
+	$barTitleArr = array(
+		'x'=>"Projects --->",  // x axis title
+		'y'=>"No. of Effort Hours --->", // y axis title
+		'm'=>"Projectwise Effort" // main title
+	);
+	$fileName = Application_Model_Util::graphFileName('hoursgraph');
+	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
+?>
+
+<img src="<?php echo '../tmp/'.$barGrph; ?>" alt="The work begins here...." /> 
+

@@ -7,20 +7,11 @@ class DashboardController extends BaseController {
     }
 
     public function indexAction() {
-		$dashboard = new Application_Model_DashboardMapper();
-        $this->view->projects = $dashboard->fetchProjects();
-        
+		//$dashboard = new Application_Model_DashboardMapper();
+		$dashboard = new Application_Model_Db_Dashboard_Mapper();
+        $projects  = $dashboard->fetchProjects();
+
+        $this->view->projects  = $projects;
     }
 
-  	public function releaseAction() {
-    	$dashboard = new Application_Model_DashboardMapper();
-        $this->view->projects = $dashboard->fetchRelease();
-        $this->render('release');
-    }
-
-	public function sprintAction() {
-    	$dashboard = new Application_Model_DashboardMapper();
-        $this->view->projects = $dashboard->fetchSprint();
-        $this->render('sprint');
-    }
 }
