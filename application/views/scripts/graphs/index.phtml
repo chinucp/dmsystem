@@ -1,4 +1,5 @@
 <?php
+	//TODO move these code to model or helper
 	$barDatax=array("Careers Portal","WDW","DCL","DLR");
 	$barDatay=array(120,300,90,75);
 	$barTitleArr = array(
@@ -6,7 +7,8 @@
 		'y'=>"No. of Story Points --->", // y axis title
 		'm'=>"Projectwise Story Points" // main title
 	);
-	$fileName = Application_Model_Util::graphFileName('storygraph');
+	$util = new Application_Model_Util();
+	$fileName = $util->graphFileName('storygraph');
 	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
 	
 ?>
@@ -36,7 +38,7 @@ THE LINE GRAPH DEPICTING PROJECT-STORIES,HRS,DEFECTS MAPPING
 	$lineTitleArr = array( 
 		'm'=>"Projects Line Graph" // main title
 	); // if reqd x and y titles can be set
-	$fileName = Application_Model_Util::graphFileName('linegraph');
+	$fileName = $util->graphFileName('linegraph');
 	$lnGrph = $this->drawLineGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
 ?>
 
@@ -61,7 +63,7 @@ THE BAR GRAPH DEPICTING PROJECT-HRS MAPPING
 		'y'=>"No. of Effort Hours --->", // y axis title
 		'm'=>"Projectwise Effort" // main title
 	);
-	$fileName = Application_Model_Util::graphFileName('hoursgraph');
+	$fileName = $util->graphFileName('hoursgraph');
 	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
 ?>
 
