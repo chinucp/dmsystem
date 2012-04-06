@@ -6,7 +6,7 @@ class Application_Model_DashboardMapper {
     	$db = Zend_Db_Table::getDefaultAdapter();
     	$resultant = $db->query($sql);
     	$resultSet = $resultant->fetchAll();
-
+		//echo '<pre>';print_r($resultSet);echo '</pre>';
 	    return $resultSet;
     }
 
@@ -20,8 +20,18 @@ class Application_Model_DashboardMapper {
 					WHERE
 					now( )
 					BETWEEN S.start_date
-					AND S.end_date';
-			return $this->fetchall($sql); */
+					AND S.end_date';*/
+    		$sql = 'SELECT P.dms_projects_id, P.dms_projects_name,PT.dms_projecttype_name,P.dms_projects_objectives, R.dms_releases_name, S.dms_sprints_name, S.dms_sprints_start_date, S.dms_sprints_end_date
+					FROM `dms_projects` AS P
+					INNER JOIN `dms_releases` AS R ON P.dms_projects_id = R.dms_releases_projects_id
+					INNER JOIN `dms_sprints` AS S ON R.dms_releases_id = S.dms_sprints_releases_id
+					INNER JOIN `dms_project_type` AS PT ON P.dms_projects_projecttype_id = PT.dms_projecttype_id
+					WHERE
+					now( )
+					BETWEEN S.dms_sprints_start_date
+					AND S.dms_sprints_end_date';
+			return $this->fetchall($sql);
+			return $this->fetchall($sql);
     }
 	public function fetchRelease(){
 

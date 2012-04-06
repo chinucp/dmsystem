@@ -1,39 +1,79 @@
 <?php
+echo $this->headLink()->appendStylesheet($this->baseUrl() . '/static/dashboard/css/inettuts.css');
+echo $this->headLink()->appendStylesheet($this->baseUrl() . '/static/dashboard/css/dashboard.css');
+echo $this->headScript()->appendFile($this->baseUrl().'/static/dashboard/js/inettuts.js');
 $this->title = "Projects";
 $this->headTitle($this->title);
 ?>
 <div class="subHeaderContainer">
 	<div class="subHeader">My Dashboard</div>
 </div>
-<div class="table">
-	<div class="rowHead">
-		<div class="colsHead widthMediumHead">Project Name</div>
-		<div class="colsHead widthMediumHead">Project Type</div>
-		<div class="colsHead widthMediumHead">Objective</div>
-		<div class="colsHead widthSmallHead">Current <br />Release</div>
-		<div class="colsHead widthSmallHead">Current <br />Sprint</div>
-		<div class="colsHead widthMediumHead">Sprint Start Date</div>
-		<div class="colsHead widthMediumHead">Sprint End date</div>
-		<div class="colsHead widthSmallHead">Action</div>
 
-	</div>
+	<div id="columns">
 
-	<?php //foreach ($this->projects as $project):?>
-	<!-- <div class="row" id="row_<?php echo $this->escape($project['id']);?>">
-		<div class="cols widthMedium"><?php echo $this->escape($project['name']);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project['type']);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project['description']);?></div>
-		<div class="cols widthSmall"><?php echo $this->escape($project['release']);?></div>
-		<div class="cols widthSmall"><?php echo $this->escape($project['sprint']);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project['start_date']);?></div>
-		<div class="cols widthMedium"><?php echo $this->escape($project['end_date']);?></div>
-		<div class="colsAction widthSmall"><a href="/dashboard/release/<?php echo $this->escape($project['id']);?>">View</a></div>
-	</div> -->
-	<?php //endforeach;?>
-	<?php if(empty($this->projects)):?>
-		<div class="elementContainer">No records available</div>
-	<?php endif;?>
-	<div class="spacer"></div>
+        <ul id="column1" class="column">
+            <li class="widget color-sky" id="intro">
+                <div class="widget-head">
+                    <h3>Introduction</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+        </ul>
 
-</div>
+        <ul id="column2" class="column">
+            <li class="widget color-sky" id="quick">
+                <div class="widget-head">
+                    <h3>Quick Links</h3>
+                </div>
+                <div class="widget-content">
+                    <div class="quicklink"><a href="#">Projects Story Reports</a></div>
+                    <div class="quicklink"><a href="#">Projects Hours Reports</a></div>
+                    <div class="quicklink"><a href="/graphs">Projects Trend Reports</a></div>
+                </div>
+            </li>
+        </ul>
+
+        <ul id="column3" class="row ui-sortable">
+            <li class="widget color-sky" id="project">
+                <div class="widget-head">
+                    <h3>Project Details</h3>
+                </div>
+                <div class="widget-content">
+                	<div class="table">
+						<div class="rowHead">
+							<div class="colsHead widthLargeHead">Project Name</div>
+							<div class="colsHead widthMediumHead">Project Type</div>
+							<div class="colsHead widthMediumHead">Current Release</div>
+							<div class="colsHead widthMediumHead">Current Sprint</div>
+							<div class="colsHead widthMediumHead">Sprint Start Date</div>
+							<div class="colsHead widthMediumHead">Sprint End date</div>
+							<div class="colsHead widthMediumHead">View Details</div>
+
+						</div>
+
+						<?php foreach ($this->projects as $project):?>
+						 <div class="row" id="row_<?php echo $this->escape($project->dmsReleasesId);?>">
+							<div class="cols widthLargeHead"><?php echo $this->escape($project->dmsProjectsName);?></div>
+							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsProjecttypeName);?></div>
+							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsReleasesName);?></div>
+							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsName);?></div>
+							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsStartDate);?></div>
+							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsEndDate);?></div>
+							<div class="colsAction "><a href="/dashboard/release/<?php echo $this->escape($project->dmsReleasesId);?>">View</a></div>
+						</div>
+						<?php endforeach;?>
+						<?php if(empty($this->projects)):?>
+							<div class="elementContainer">No records available</div>
+						<?php endif;?>
+						<div class="spacer"></div>
+					</div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+
 

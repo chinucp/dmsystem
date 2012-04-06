@@ -22,88 +22,56 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
 	 * @name Constructor
 	 * @access public
 	 *
-	 * @param $options|array|default=null
+	 * @param $tableName|string|default=null
 	 * This sets up the table object.
 	 */
-	public function __construct(array $options = null)
+	public function __construct($tableName = null)
 	{
-		$this->setDbTable('Application_Model_Db_Dashboard_Table');
+		empty($tableName) ? $this->setDbTable('Application_Model_Db_Dashboard_Table') : $this->setDbTable('Application_Model_Db_Dashboard_Table', $tableName);
 	}
 
 	/**
-	 * @name fetchViewPageItems
+	 * @name fetchProjects
 	 * @access public
 	 *
-	 * This method fetches all the items to be displayed in view page.
+	 * @param $projectId|int|default null
+	 * This method fetches all the items to be displayed in projects view page.
 	 */
-	public function fetchViewPageItems()
+	public function fetchProjects($projectId = null)
 	{
-		$this->formQuery();
-		return $this->getDisplayItems();
-    }
-
-    /**
-	 * @name fetchAddPageUserTypeItems
-	 * @access public
-	 *
-	 * This method fetches all the usertypes to be displayed add page listbox.
-	 */
-	public function fetchAddPageUserTypeItems()
-	{
-		$this->clearFetchQuery();
-		$this->formQuery(array("from" => array("tableName" => array('ut' => 'user_types'),
-    			"colsToBFetched" => array("id","alias_name")
-    			),
-    			"where" => array("condition" => "ut.deleted != 1"),
-    			"order" => array("columns" => "ut.sort_order ASC")
-
+		$query = array("from" => array("tableName" => array('p' => 'dms_projects'),
+    		"colsToBFetched" => array("p.dms_projects_id",
+    			 "p.dms_projects_name",
+				 "p.dms_projects_objectives",
+				 "DATE_FORMAT(s.dms_sprints_start_date, '%d/%m/%Y') AS dms_sprints_start_date",
+    			 "DATE_FORMAT(s.dms_sprints_end_date, '%d/%m/%Y') AS dms_sprints_end_date",
+    			 "p.dms_projects_active"
+    			)
+    		),
+    		"innerJoin#1" => array("tableName" => array("r" => "dms_releases"),
+    			"condition" => "p.dms_projects_id = r.dms_releases_projects_id",
+    			"columns" => array("r.dms_releases_name","r.dms_releases_id")
+    		),
+    		"innerJoin#2" => array("tableName" => array("s" => "dms_sprints"),
+    			"condition" => "r.dms_releases_id = s.dms_sprints_releases_id",
+    			"columns" => array("s.dms_sprints_name")
+    		),
+    		"innerJoin#3" => array("tableName" => array("pt" => "dms_project_type"),
+    			"condition" => "p.dms_projects_projecttype_id = pt.dms_projecttype_id",
+    			"columns" => array("pt.dms_projecttype_name","pt.dms_projecttype_alias")
     		)
     	);
+    	$query["where"] = array("condition" => "now( )
+					BETWEEN S.dms_sprints_start_date
+					AND S.dms_sprints_end_date");
+    	if (!empty($projectId)) {
+    			$query["where"] = array("condition" => "p.dms_projects_id = " . $projectId);
+    	}
+    	$query["order"] = array("columns" => array("p.dms_projects_name ASC"));
+    	$this->formQuery($query);
 		return $this->getDisplayItems();
     }
 
-    /**
-	 * @name fetchAddPageDesigsItems
-	 * @access public
-	 *
-	 * This method fetches all the designations to be displayed add page listbox.
-	 */
-	public function fetchAddPageDesigsItems()
-	{
-		$this->clearFetchQuery();
-		$this->formQuery(array("from" => array("tableName" => array('d' => 'designations'),
-    			"colsToBFetched" => array("id",
-    				"designation"
-    				)
-    			),
-    			"where" => array("condition" => "d.deleted != 1"),
-    			"order" => array("columns" => "d.sort_order ASC")
-
-    		)
-    	);
-		return $this->getDisplayItems();
-    }
-
-    /**
-	 * @name fetchAddPageRolesItems
-	 * @access public
-	 *
-	 * This method fetches all the roles to be displayed add page listbox.
-	 */
-	public function fetchAddPageRolesItems()
-	{
-		$this->clearFetchQuery();
-		$this->formQuery(array("from" => array("tableName" => array('r' => 'roles'),
-    			"colsToBFetched" => array("id",
-    				"role"
-    				)
-    			),
-    			"where" => array("condition" => "r.deleted != 1"),
-    			"order" => array("columns" => "r.sort_order ASC")
-    		)
-    	);
-		return $this->getDisplayItems();
-    }
 
     /**
 	 * @name getDisplayItems
@@ -114,18 +82,15 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
     private function getDisplayItems()
     {
     	$resultSet = $this->fetchData();
-        $displayItems = array();
+
+    	$displayItems = array();
         $resultSetArray = $resultSet->toArray();
         foreach ($resultSetArray as $rowArray) {
- 			 $usersManager = new Application_Model_Db_Users_Manager();
-			foreach ($rowArray as $column => $value) {
-				$column = str_replace('_', '', $column);
-            	$usersManager->$column = $value;
-			}
-            $displayItems[] = $usersManager;
+        	$usersManager = new Application_Model_Db_Dashboard_Manager();
+ 			$usersManager->setOptions($rowArray);
+			$displayItems[] = $usersManager;
 		}
-
-        return $displayItems;
+		return $displayItems;
     }
 
     /**
@@ -137,35 +102,8 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
 	 */
     private function formQuery(array $queryParams = null)
     {
-    	if (!empty($queryParams) && is_array($queryParams)) {
-    		$this->_fetchQuery = $queryParams;
-    	} else {
-    		$this->_fetchQuery = array("from" => array("tableName" => array('u' => 'users'),
-    			"colsToBFetched" => array("id",
-    				"first_name",
-    				"last_name",
-    				"username",
-    				"email",
-    				"status"
-    				)
-    			),
-    			"leftJoin#1" => array("tableName" => array("d" => "designations"),
-    				"condition" => "u.designations_id = d.id",
-    				"columns" => array("designation")
-    			),
-    			"leftJoin#2" => array("tableName" => array("ut" => "user_types"),
-    				"condition" => "u.user_types_id = ut.id",
-    				"columns" => array("alias_name")
-    			),
-    			"leftJoin#3" => array("tableName" => array("r" => "roles"),
-    				"condition" => "u.roles_id = r.id",
-    				"columns" => array("role")
-    			),
-    			"where" => array("condition" => "u.deleted != 1"),
-    			"order" => array("columns" => array("u.first_name ASC", "u.last_name ASC"))
+    	$this->_fetchQuery = $queryParams;
 
-    		);
-    	}
     }
 
   /**
@@ -179,5 +117,5 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
         $this->_fetchQuery = array();
     }
 
-    
+
 }
