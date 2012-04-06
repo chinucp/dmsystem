@@ -445,23 +445,23 @@ select {
 }
 
 .widthMedium{
-	width: 130px;
+	width: 138px;
 }
 
 .widthLarge{
-	width: 224px;
+	width: 164px;
 }
 
 .widthSmall{
-	width: 50px;
+	width: 75px;
 }
 
 .widthMediumHead{
-	width: 134px;
+	width: 190px;
 }
 
 .widthLargeHead{
-	width: 230px;
+	width: 172px;
 }
 
 .widthSmallHead{
@@ -484,7 +484,7 @@ select {
 	width: 15px;
 	cursor: pointer;
 	display: inline-block;
-	margin: -16px 0 0 65px;
+	margin: -16px 0 0 86px;
 	padding: 0;
 	zoom: 1;
 	-webkit-background-clip: padding-box;

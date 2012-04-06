@@ -15,25 +15,25 @@ $this->headTitle($this->title);
 		<div class="colsHead widthMediumHead">Status</div>
 		<div class="colsHead widthSmallHead">Action</div>
 	</div>
-	<?php foreach ($this->viewPageItems as $project) : ?>
-	<div class="row" id="row_<?php echo $this->escape($project->dmsProjectsId); ?>">
+	<?php foreach ($this->projects as $project) : ?>
+	<div class="row" id="row_<?php echo $this->escape($project->id); ?>">
 		<div class="cols widthLarge">
-			<?php echo $this->escape($project->dmsProjectsName); ?>
+			<?php echo $this->escape($project->projectName); ?>
 		</div>
 		<div class="cols widthMedium">
-			<?php echo $this->escape($project->dmsProjecttypeName); ?>
+			<?php echo $this->escape($project->projectType); ?>
 		</div>
 		<div class="cols widthMedium">
 		</div>
 		<div class="cols widthMedium">
-			<?php echo $this->escape($project->dmsProjectsStartDate); ?>
+			<?php echo $this->escape($project->startDate); ?>
 		</div>
 		<div class="cols widthMedium">
-			<?php echo $this->escape($project->dmsProjectsEndDate); ?>
+			<?php echo $this->escape($project->startDate); ?>
 		</div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->dmsStatusName);?></div>
+		<div class="cols widthMedium">In Progress</div>
 		<div class="colsAction widthSmall">
-			<a href="projects/releases/<?php echo $this->escape($project->dmsProjectsId); ?>">View</a>
+			<a href="<?php echo $this->escape($project->id); ?>/releases/view">View</a>
 			<a href="projects/edit">Edit</a>
 		</div>
 		<div class="colsAction uiCloseButton widthSmall"></div>

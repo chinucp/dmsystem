@@ -48,8 +48,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initAclControllerPlugin() {
         ##$front = Zend_Controller_Front::getInstance();
         ##$aclPlugin = new ACC_Controller_Plugin_Acl(new ACC_Controller_Helper_Acl());
-        ##$front->registerPlugin($aclPlugin);      
-        
+        ##$front->registerPlugin($aclPlugin);
     }
 
+    protected function _initRewrite() {
+        $front = Zend_Controller_Front::getInstance();
+        $router = $front->getRouter();
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'production');
+        $router->addConfig($config, 'routes');
+    }
 }

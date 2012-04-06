@@ -1,0 +1,91 @@
+<?php
+$this->title = "Release View of Projects";
+$this->headTitle($this->title);
+?>
+<div class="subHeaderContainer">
+	<div class="subHeader">View Releases for Project - XXXXXXXXXXXXX</div>
+	<div class="right-column">
+		<div class="rgtTab">
+			<span id="sview">Sprint</span> &nbsp; | &nbsp; <span id="rview">Release</span>
+		</div>
+	</div>
+</div>
+<div id="rviewInfo" class="table">
+	<div class="rowData">
+		<dl>
+			<dt>
+				<label>Total number of Stories:</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Test Cases Created:</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Test Executed:</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Defects:</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of P1/P2:</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Dev Effort</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Test Effort</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Rework Effort</label>
+			</dt>
+			<dd>XXXXXXX</dd>
+			<dt>
+				<label>Total Number of Non SPE </label>
+			</dt>
+			<dd>XXXXXXX</dd>
+		</dl>
+	</div>
+</div>
+<div id="sviewInfo">
+	<div class="rowHead">
+		<div class="colsHead widthLargeHead">Sprint</div>
+		<div class="colsHead widthMediumHead">Date</div>
+		<div class="colsHead widthMediumHead">Stories/Task</div>
+		<div class="colsHead widthSmallHead">Defects</div>
+		<div class="colsHead widthMediumHead">P1/P2 Defects</div>
+		<div class="colsHead widthMediumHead">Hours</div>
+		<div class="colsHead widthSmallHead">Status</div>
+		<div class="colsHead widthSmallHead">Action</div>
+	</div>
+	<?php foreach ($this->projects as $project) : ?>
+	<div class="row" id="row_<?php echo $this->escape($project->id); ?>">
+		<div class="cols widthLarge">
+			<?php echo $this->escape($project->projectName); ?>
+		</div>
+		<div class="cols widthMedium">
+			SD:
+			<?php echo $this->escape($project->startDate); ?>
+			<br />ED:
+			<?php echo $this->escape($project->endDate); ?>
+		</div>
+		<div class="cols widthMedium">XX</div>
+		<div class="cols widthSmall">XX</div>
+		<div class="cols widthMedium">XX</div>
+		<div class="cols widthMedium">
+			Dev Hrs:XX<br /> Test Hrs: XX<br /> Rework Hrs: XX<br /> NonSPE
+			Hrs: XX<br />
+		</div>
+		<div class="cols widthSmall">In Progress</div>
+		<div class="colsAction widthSmall">
+			<a href="#">Delete</a>
+		</div>
+	</div>
+	<?php endforeach; ?>
+	<div class="spacer"></div>
+</div>
