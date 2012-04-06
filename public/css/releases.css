@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document for releaes */
+.releaseTable .width1{
+	width:150px;
+}
+.releaseTable .width2 {
+	width: 90px;
+}
+.releaseTable .width3 {
+	width: 90px;
+}
+
+.releaseTable .width4 {
+    margin-right: 20px;
+    width: 220px;
+}
+
+.releaseTable .width5 {
+	width: 124px;
+	margin-right:8px;
+}
+
+.releaseTable .width6 {
+	width: 74px;
+	margin-right:3px;
+}
+
+.releaseTable .width7 {
+	width: 86px;
+}
+
+.releaseTable .width8 {
+	width: 86px;
+}
+
+.releaseTable .cols{
+	padding:20px 2px 8px;
+}
+
+.releaseTable .colsHead{
+	padding:0px 2px 2px 0px;
+}
+
+.releaseTable .widthHead1 {
+    width: 154px;
+}
+
+.releaseTable .widthHead2 {
+    width: 92px;
+}
+
+.releaseTable .widthHead3{
+	width:92px;
+}
+
+.releaseTable .widthHead4{
+	width:244px;
+}
+
+.releaseTable .widthHead5{
+	width:130px;
+}
+
+.releaseTable .widthHead6{
+	width:88px;
+}
+
+.releaseTable .widthHead7 {
+    float: left;
+    margin-right: 10px;
+    width: 50px;
+}
+
+.releaseTable .widthHead8{
+	width:150px;
+}
+
+.modal-row {
+    border-bottom: 1px solid whitesmoke;
+    float: left;
+    margin: 16px 28px 0 0;
+    width: 98%;
+}
+
+.modal-row label {
+    float: left;
+    font-family: Arial,Verdana,Geneva,sans-serif;
+    font-size: 12px;
+    /*font-weight: bold;*/
+    width: 268px;
+    color: #565669;
+}
+.modal-row span {
+    color: #6D84B4;
+    float: right;
+    font-family: Arial,Verdana,Geneva,sans-serif;
+    font-weight: bold;
+}

@@ -10,7 +10,7 @@ class BaseController extends Zend_Controller_Action {
 
     	// check for authectication for each controller call
 		$this->authentication();
-		
+
 
     }
 
@@ -24,8 +24,9 @@ class BaseController extends Zend_Controller_Action {
      */
     protected function navigationSelection(){
        	$uri = $this->_request->getPathInfo();
+       	$uriParts = explode("/", $uri);
         $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-        $activeNav = $this->view->navigation()->findByUri($baseUrl . $uri);
+        $activeNav = $this->view->navigation()->findByUri($baseUrl ."/". $uriParts[1]);
         $activeNav->active = true;
     }
     /**
@@ -47,7 +48,7 @@ class BaseController extends Zend_Controller_Action {
 			$this->_redirect('/');
 		}
     }
-   
-    
+
+
 
 }

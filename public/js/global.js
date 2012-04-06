@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	
-	
 	var id;
 	$("#dialog:ui-dialog").dialog("destroy");
 	$("#dialog-delete-project").dialog({
@@ -158,4 +157,5 @@ $(document).ready(function() {
 	});
 	
 	/**********************************************************************/
+	
 });

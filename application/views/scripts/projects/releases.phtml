@@ -2,16 +2,18 @@
 $this->title = "Release View of Projects";
 $this->headTitle($this->title);
 ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/releases.css'); ?>
+<?php echo $this->headScript()->prependFile($this->baseUrl().'/js/releases.js'); ?>
 <div class="subHeaderContainer">
-	<div class="subHeader">View Releases for Project - XXXXXXXXXXXXX</div>
+	<div class="subHeader">View Releases</div>
 	<div class="right-column">
 		<div class="rgtTab">
-			<span id="sview">Sprint</span> &nbsp; | &nbsp; <span id="rview">Release</span>
+			<!-- <span id="sview">Sprint</span> &nbsp; | &nbsp; <span id="rview">Release</span> -->
 		</div>
 	</div>
 </div>
 <div id="rviewInfo" class="table">
-	<div class="rowData">
+	<!-- <div class="rowData">
 		<dl>
 			<dt>
 				<label>Total number of Stories:</label>
@@ -50,43 +52,53 @@ $this->headTitle($this->title);
 			</dt>
 			<dd>XXXXXXX</dd>
 		</dl>
-	</div>
+	</div>-->
 </div>
-<div id="sviewInfo">
-	<div class="rowHead">
-		<div class="colsHead widthLargeHead">Sprint</div>
-		<div class="colsHead widthMediumHead">Date</div>
-		<div class="colsHead widthMediumHead">Stories/Task</div>
-		<div class="colsHead widthSmallHead">Defects</div>
-		<div class="colsHead widthMediumHead">P1/P2 Defects</div>
-		<div class="colsHead widthMediumHead">Hours</div>
-		<div class="colsHead widthSmallHead">Status</div>
-		<div class="colsHead widthSmallHead">Action</div>
-	</div>
+<div class="releaseTable">
+	<div id="sviewInfo">
+		<div class="rowHead">
+			<div class="colsHead widthHead1">Release Name</div>
+			<div class="colsHead widthHead2">Start Date</div>
+			<div class="colsHead widthHead3">End Date</div>
+			<div class="colsHead widthHead4">Objectives</div>
+			<div class="colsHead widthHead5">Risks</div>
+			<div class="colsHead widthHead6">Status</div>
+			<div class="colsHead widthHead7">Actions</div>
+			<div class="colsHead widthHead8"></div>
+		</div>
 
-	<?php foreach ($this->viewPageItems as $release) : ?>
-	<div class="row" id="row_<?php echo $this->escape($release->dmsReleasesId); ?>">
-		<div class="cols widthLarge">
-			<?php echo $this->escape($release->dmsReleasesName); ?>
+		<?php
+		foreach ($this->viewPageItems as $release) :?>
+
+		<div class="row" id="row_<?php echo $this->escape($release->dmsReleasesId);?>">
+			<div class="cols width1">
+				<?php echo $this->escape($release->dmsReleasesName); ?>
+			</div>
+			<div class="cols width2">
+				<?php echo $this->escape($release->dmsReleasesStartDate); ?>
+			</div>
+			<div class="cols width3"><?php echo $this->escape($release->dmsReleasesEndDate); ?></div>
+			<div class="cols width4"><?php echo $this->escape($release->dmsReleasesObjectives);?></div>
+			<div class="cols width5"><?php echo $this->escape($release->dmsReleasesRiskinfo);?></div>
+			<div class="cols width6"><?php echo ($this->escape($release->dmsReleasesActive))?"Active":"Inactive";?></div>
+			<div class="colsAction width7"><a href="#" class="viewReleaseInfo" id="<?php echo $this->escape($release->dmsReleasesId);?>" title="Release details">View more</a></div>
+			<div class="colsAction width8"><a href="<?php echo $this->baseUrl()."/releases/sprints/".$release->dmsReleasesId;?>">View Sprints</a></div>
 		</div>
-		<div class="cols widthMedium">
-			SD:
-			<?php echo $this->escape($release->dmsReleasesStartDate); ?>
-			<br />ED:
-			<?php echo $this->escape($release->dmsReleasesEndDate); ?>
+		<?php endforeach; ?>
+		<div id="dialog-modal" title="Release information">
+
+				<div class="modal-row"><label>Total Number of Stories: </label><span id="totalStories"></span> </div>
+				<div class="modal-row"><label>Total Dev Hours:</label>	<span id="totalDevHours"></span> </div>
+				<div class="modal-row"><label>Total Test Hours:</label> <span id="totalTestHours"></span></div>
+				<div class="modal-row"><label>Total Rework Hours (Dev + Test):</label> <span id="totalReworkHours"></span> </div>
+				<div class="modal-row"><label>Total Number of Defects:</label><span id="totalDefects"></span> </div>
+				<div class="modal-row"><label>Total Number of P1/P2 defects:</label> <span id="totalMajorDefects"></span></div>
+				<div class="modal-row"><label>Total NON SPE hours:</label> <span id="totalNonSpeHours"></span> </div>
+
 		</div>
-		<div class="cols widthMedium">XX</div>
-		<div class="cols widthSmall">XX</div>
-		<div class="cols widthMedium">XX</div>
-		<div class="cols widthMedium">
-			Dev Hrs:XX<br /> Test Hrs: XX<br /> Rework Hrs: XX<br /> NonSPE
-			Hrs: XX<br />
-		</div>
-		<div class="cols widthSmall"></div>
-		<div class="colsAction widthSmall">
-			<a href="#">Delete</a>
-		</div>
+		<input type="hidden" name="baseUrl" id="baseUrl" value=<?php echo $this->baseUrl();?> />
+
+
+<div class="spacer"></div>
 	</div>
-	<?php endforeach; ?>
-	<div class="spacer"></div>
 </div>

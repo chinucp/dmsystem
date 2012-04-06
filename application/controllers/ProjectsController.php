@@ -52,6 +52,9 @@ class ProjectsController extends BaseController {
     	$viewPageItems = new Application_Model_Db_Projects_Mapper();
 		// Must Pass the id(project id) for the particular record(s) to be fetched.
 		$this->view->viewPageItems = $viewPageItems->fetchProjectReleases($projectsId);
+
+		// Later we may need to show project name in view releases.
+		// $this->view->projectName = $this->view->viewPageItems->dmsProjectsName;
     }
 
     /**
