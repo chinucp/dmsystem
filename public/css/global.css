@@ -6,7 +6,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+.shadow {
+    border: 1px solid #D8D7D6;
+    box-shadow: 3px 3px 4px #666666;
+}
 h1,h2 {
 	color: #91959C;
 	float: right;
