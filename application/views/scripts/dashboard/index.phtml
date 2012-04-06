@@ -54,14 +54,14 @@ $this->headTitle($this->title);
 						</div>
 
 						<?php foreach ($this->projects as $project):?>
-						 <div class="row" id="row_<?php echo $this->escape($project->dmsReleasesId);?>">
+						 <div class="row" id="row_<?php echo $this->escape($project->dmsProjectsId);?>">
 							<div class="cols widthLargeHead"><?php echo $this->escape($project->dmsProjectsName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsProjecttypeName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsReleasesName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsStartDate);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsEndDate);?></div>
-							<div class="colsAction "><a href="/dashboard/release/<?php echo $this->escape($project->dmsReleasesId);?>">View</a></div>
+							<div class="colsAction "><a href="/projects/release/<?php echo $this->escape($project->dmsProjectsId);?>">View</a></div>
 						</div>
 						<?php endforeach;?>
 						<?php if(empty($this->projects)):?>
