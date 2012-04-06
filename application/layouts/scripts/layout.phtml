@@ -8,29 +8,31 @@ echo $this->doctype();
 <head>
 <?php echo $this->headMeta(); ?>
 <?php echo $this->headTitle(); ?>
-
-<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/redmond/jquery-ui-1.8.18.custom.css'); ?>
-<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/global.css');?>
-
-<?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery-1.7.1.min.js'); ?>
-<?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery-ui-1.8.18.custom.min.js'); ?>
-<?php echo $this->headScript()->appendFile($this->baseUrl().'/js/global.js'); ?>
-
+<?php
+// Do not break this appending in multiple echo statements.
+// It will cause the css and js to load multiple times. Do not know the reason !!!
+// Also be careful with the order in loading these files.
+echo $this->headLink()->prependStylesheet($this->baseUrl()
+                . '/css/global.css')->prependStylesheet($this->baseUrl() . '/css/redmond/jquery-ui-1.8.18.custom.css');
+?>
+<?php echo $this->headScript()->prependFile($this->baseUrl() . '/js/global.js')->prependFile($this->baseUrl() . '/js/jquery-ui-1.8.18.custom.min.js')->prependFile($this->baseUrl()
+                . '/js/jquery-1.7.1.min.js');
+?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
 			<h2>Delivery Management System</h2>
-
 		</div>
 		<div id="topMenu">
-		<?php echo $this->navigation()->menu(); ?>
+			<?php echo $this->navigation()->menu(); ?>
 		</div>
 		<div id="homeContent">
-		<div class="rightBlock"><?php echo $this->loggedInAs(); ?></div>
-		<?php echo $this->layout()->content; ?>
-		<div id="push"></div>
-
+			<div class="rightBlock">
+				<?php echo $this->loggedInAs(); ?>
+			</div>
+			<?php echo $this->layout()->content; ?>
+			<div id="push"></div>
 		</div>
 		<div id="footer">Copyright 2012 - Abc. All Rights Reserved.</div>
 	</div>
