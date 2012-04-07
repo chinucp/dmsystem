@@ -1,13 +1,24 @@
 $(document).ready(function() {
 	var id;
-	$(".tip").bind('hover',function(event) {
+	$(".defects_tip").bind('hover',function(event) {
 		id = $(this).attr('id');
 
 		var sprId = id.split("_");
 		$(this).simpletip({
-			content : $("#tooltip_" + sprId[1]).html(),
+			content : $("#defects_tooltip_" + sprId[2]).html(),
 			fixed : true,
 			position : [ "-200", "-185" ]
+		});
+	});
+	
+	$(".hours_tip").bind('hover',function(event) {
+		id = $(this).attr('id');
+
+		var sprId = id.split("_");
+		$(this).simpletip({
+			content : $("#hours_tooltip_" + sprId[2]).html(),
+			fixed : true,
+			position : [ "-200", "-220" ]
 		});
 	});
 	

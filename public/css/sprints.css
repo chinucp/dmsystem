@@ -1,2 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+
+a.hours_tip, a.defects_tip{
+	text-decoration:none;
+}
