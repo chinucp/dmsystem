@@ -61,7 +61,7 @@ $this->headTitle($this->title);
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsStartDate);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsEndDate);?></div>
-							<div class="colsAction "><a href="/projects/releases/<?php echo $this->escape($project->dmsProjectsId);?>">View</a></div>
+							<div class="colsAction "><a href="<?php echo $this->baseUrl()."/projects/releases/".$this->escape($project->dmsProjectsId);?>">View</a></div>
 						</div>
 						<?php endforeach;?>
 						<?php if(empty($this->projects)):?>

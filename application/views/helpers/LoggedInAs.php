@@ -8,9 +8,7 @@ class Zend_View_Helper_LoggedInAs extends Zend_View_Helper_Abstract {
             $username = $auth->getIdentity()->dms_users_username;
             $firstName = $auth->getIdentity()->dms_users_firstname;
             $lastName = $auth->getIdentity()->dms_users_lastname;
-            $logoutUrl = $this->view->url(array(
-                'controller' => 'index', 'action' => 'logout'
-            ), null, true);
+            $logoutUrl = Zend_Controller_Front::getInstance()->getBaseUrl()."/index/logout";
             return 'Signed in as: <b>' . ucfirst($firstName) . ' ' . ucfirst($lastName) . '</b>. Click here to<a href="'
                             . $logoutUrl . '">Sign out</a>';
         }

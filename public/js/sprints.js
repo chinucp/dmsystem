@@ -22,5 +22,9 @@ $(document).ready(function() {
 		});
 	});
 	
+	$("#blueButton").click(function(){
+		
+	})
+	
 	
 });
