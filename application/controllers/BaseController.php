@@ -10,8 +10,6 @@ class BaseController extends Zend_Controller_Action {
 
     	// check for authectication for each controller call
 		$this->authentication();
-
-
     }
 
     public function indexAction() {

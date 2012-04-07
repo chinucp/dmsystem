@@ -239,107 +239,6 @@ a {
 #homeContent p {
 	margin: 30px 0px;
 }
-
-/*** Table Sorter CSS  ***/
-/*
-table#tablesorter-demo {
-	margin: 10px 0 0 0;
-}
-
-table.tablesorter {
-	font-family: arial;
-	background-color: #CDCDCD;
-	margin: 10px 0pt 15px;
-	font-size: 8pt;
-	width: 100%;
-	text-align: left;
-}
-
-table[border=0]
-{
-border-width:0px;
-}
-table[cellspacing=1]
-{
-border-spacing:1px;
-}
-
-table {
-	display: table;
-	border-collapse: separate;
-	border-spacing: 2px;
-	border-color: gray;
-}
-
-thead {
-	display: table-header-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-tr {
-	display: table-row;
-	vertical-align: inherit;
-	border-color: inherit;
-}
-
-table.tablesorter thead tr .headerSortDown,table.tablesorter thead tr .headerSortUp
-	{
-	background-color: #8DBDD8;
-}
-
-table.tablesorter thead tr .headerSortDown {
-	background-image: url(../images/desc.gif);
-}
-
-table.tablesorter thead tr .header {
-	background-image: url(bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-
-table.tablesorter thead tr th,table.tablesorter tfoot tr th {
-	background-color: #E6EEEE;
-	border: 1px solid white;
-	font-size: 8pt;
-	padding: 4px;
-	border-image: initial;
-}
-
-th {
-	font-weight: bold;
-}
-
-td,th {
-	display: table-cell;
-	vertical-align: inherit;
-}
-
-tbody {
-	display: table-row-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-table.tablesorter tbody tr.odd td {
-	background-color: #F0F0F6;
-}
-
-table.tablesorter tbody td {
-	color: #3D3D3D;
-	padding: 4px;
-	background-color: white;
-	vertical-align: top;
-}
-
-table.tablesorter thead tr .header {
-	background-image: url(../images/bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-*/
 /*************** Form CSS ***************/
 .formContainer {
 	float: left;
@@ -576,12 +475,11 @@ input[type="button"]:hover, input[type="submit"]:hover {
 }
 
 .subHeader {
-    /*color: #DD4B39;*/
-    color:#72A9D3;
+    color: #72A9D3;
     float: left;
     font-size: 1.7em;
     font-weight: normal;
-    margin: 50px 0 10px;
+    margin: 30px 0 0;
     width: 622px;
 }
 
@@ -667,124 +565,6 @@ strong {
 	color: #222;
 }
 
-/*** Table Sorter CSS  ***/
-table#tablesorter-demo {
-	margin: 10px 0 0 0;
-}
-
-table.tablesorter {
-	font-family: arial;
-	background-color: #CDCDCD;
-	margin: 10px 0pt 15px;
-	font-size: 8pt;
-	width: 100%;
-	text-align: left;
-}
-
-table
-
-
-
-
-[
-border
-=
-0]
-{
-border-width
-:
-0px;
-}
-table
-
-
-
-
-[
-cellspacing
-=
-1]
-{
-border-spacing
-:
-1px;
-}
-table {
-	display: table;
-	border-collapse: separate;
-	border-spacing: 2px;
-	border-color: gray;
-}
-
-thead {
-	display: table-header-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-tr {
-	display: table-row;
-	vertical-align: inherit;
-	border-color: inherit;
-}
-
-table.tablesorter thead tr .headerSortDown,table.tablesorter thead tr .headerSortUp
-	{
-	background-color: #8DBDD8;
-}
-
-table.tablesorter thead tr .headerSortDown {
-	background-image: url(../images/desc.gif);
-}
-
-table.tablesorter thead tr .header {
-	background-image: url(bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-
-table.tablesorter thead tr th,table.tablesorter tfoot tr th {
-	background-color: #E6EEEE;
-	border: 1px solid white;
-	font-size: 8pt;
-	padding: 4px;
-	border-image: initial;
-}
-
-th {
-	font-weight: bold;
-}
-
-td,th {
-	display: table-cell;
-	vertical-align: inherit;
-}
-
-tbody {
-	display: table-row-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-table.tablesorter tbody tr.odd td {
-	background-color: #F0F0F6;
-}
-
-table.tablesorter tbody td {
-	color: #3D3D3D;
-	padding: 4px;
-	background-color: white;
-	vertical-align: top;
-}
-
-table.tablesorter thead tr .header {
-	background-image: url(../images/bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-/*** Table Sorter CSS  ***/
 dl dt label {
 	font-weight: bold;
 }
@@ -826,7 +606,7 @@ dl dd {
 }
 .right-column, .left-column {
     float: right;
-    margin: 45px 0 10px;
+    margin: 45px 0 0px;
     width: 342px;
 }
 .optionSelector{

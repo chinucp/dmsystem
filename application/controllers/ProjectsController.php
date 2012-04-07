@@ -64,9 +64,10 @@ class ProjectsController extends BaseController {
 	 * This method controls sprints page.
 	 */
     public function sprintsAction() {
-
+        $releaseId= $this->_request->getParam('releaseId');
     	$viewPageItems = new Application_Model_Db_Projects_Mapper();
 		// Must Pass the id(releases id) for the particular record(s) to be fetched.
-		$this->view->viewPageItems = $viewPageItems->fetchProjectSprints($releasesId);
+		$this->view->viewPageItems = $viewPageItems->fetchProjectSprints($releaseId);
+		//var_dump($this->view->viewPageItems );exit;
     }
 }

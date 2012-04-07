@@ -1,5 +1,5 @@
 <?php
-$this->title = "Release View of Projects";
+$this->title = "Release";
 $this->headTitle($this->title);
 ?>
 <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/releases.css'); ?>
@@ -82,7 +82,7 @@ $this->headTitle($this->title);
 			<div class="cols width5"><?php echo $this->escape($release->dmsReleasesRiskinfo);?></div>
 			<div class="cols width6"><?php echo ($this->escape($release->dmsReleasesActive))?"Active":"Inactive";?></div>
 			<div class="colsAction width7"><a href="#" class="viewReleaseInfo" id="<?php echo $this->escape($release->dmsReleasesId);?>" title="Release details">View more</a></div>
-			<div class="colsAction width8"><a href="<?php echo $this->baseUrl()."/releases/sprints/".$release->dmsReleasesId;?>">View Sprints</a></div>
+			<div class="colsAction width8"><a href="<?php echo $this->baseUrl()."/projects/releases/sprints/".$release->dmsReleasesId;?>">View Sprints</a></div>
 		</div>
 		<?php endforeach; ?>
 		<div id="dialog-modal" title="Release information">

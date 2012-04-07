@@ -224,7 +224,7 @@ class Application_Model_Db_Projects_Manager
 		return $this;
 	}
 
-	public function getReleasesName(){
+	public function getDmsReleasesName(){
 		return $this->_dmsReleasesName;
 	}
 

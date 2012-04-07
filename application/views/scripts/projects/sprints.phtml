@@ -1,0 +1,78 @@
+<?php
+$this->title = "Sprints";
+$this->headTitle($this->title);
+?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/releases.css')->prependStylesheet($this->baseUrl().'/css/sprints.css'); ?>
+<?php echo $this->headScript()->prependFile($this->baseUrl().'/js/sprints.js'); ?>
+<div class="subHeaderContainer">
+	<div class="subHeader">View Sprints</div>
+	<div class="right-column">
+		<div class="rgtTab">
+			<!-- <span id="sview">Sprint</span> &nbsp; | &nbsp; <span id="rview">Release</span> -->
+		</div>
+	</div>
+</div>
+<div id="rviewInfo" class="table">
+
+</div>
+<div class="releaseTable">
+
+	<div id="sviewInfo">
+		<div class="rowHead">
+			<div class="colsHead widthHead1">Sprint Name</div>
+			<div class="colsHead widthHead2">Start Date</div>
+			<div class="colsHead widthHead3">End Date</div>
+			<div class="colsHead widthHead4">Stories/Tasks #</div>
+			<div class="colsHead widthHead5">Defects #</div>
+			<div class="colsHead widthHead6">Hours</div>
+			<div class="colsHead widthHead7">Status</div>
+			<div class="colsHead widthHead8"></div>
+		</div>
+
+
+
+<!--
+<div id="tip1_up" style="display:none;">{ deltaDirection: 'up' }</div>
+<a id="a1_up" href="#">above</a> -->
+		<?php
+		foreach ($this->viewPageItems as $sprint) :?>
+		<div class="row" id="row_<?php echo $this->escape($sprint->dmsSprintsId);?>">
+			<div class="cols width1">
+				<?php echo $this->escape($sprint->dmsSprintsName); ?>
+			</div>
+			<div class="cols width2">
+				<?php echo $this->escape($sprint->dmsSprintsStartDate); ?>
+			</div>
+			<div class="cols width3"><?php echo $this->escape($sprint->dmsSprintsEndDate); ?></div>
+			<div class="cols width4"><?php echo $this->escape($sprint->dmsSprintslogStories);?></div>
+			<div class="cols width5">
+				<a href="#" class="tip" id="tip_<?php echo $this->escape($sprint->dmsSprintsId); ?>" >
+				    <?php echo $this->escape($sprint->dmsSprintslogMajordefects)+
+				            $this->escape($sprint->dmsSprintslogMinordefects) ;?>
+				   <span class="tooltip" id="tooltip_<?php echo $this->escape($sprint->dmsSprintsId); ?>" style="left: 493px; top: 509px; display: none; ">
+						<label>P1/P2 Defects: </label><span id="majorDefects"><?php echo $this->escape($sprint->dmsSprintslogMajordefects);?></span>
+						<br />
+						<label>Minor Defects:</label> <span id="minorDefects"><?php echo $this->escape($sprint->dmsSprintslogMinordefects) ;?></span>
+				  </span>
+				</a>
+
+			</div>
+			<div class="cols width6">
+				<?php echo $this->escape($sprint->dmsSprintslogDev) +
+				        $this->escape($sprint->dmsSprintslogTest) +
+				        $this->escape($sprint->dmsSprintslogReworkdev) +
+				        $this->escape($sprint->dmsSprintslogReworktest) +
+				        $this->escape($sprint->dmsSprintslogNonspe);
+				?>
+			</div>
+			<div class="colsAction width7"><?php echo ($this->escape($sprint->dmsSprintsActive))?"Active":"Inactive"?></div>
+			<div class="colsAction width8"><a href="#">Delete</a></div>
+		</div>
+		<?php endforeach; ?>
+
+		<input type="hidden" name="baseUrl" id="baseUrl" value=<?php echo $this->baseUrl();?> />
+
+
+<div class="spacer"></div>
+	</div>
+</div>
