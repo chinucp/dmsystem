@@ -1,48 +1,54 @@
-<?php
-	//TODO move these code to model or helper
-	$barDatax=array("Careers Portal","WDW","DCL","DLR");
-	$barDatay=array(120,300,90,75);
-	$barTitleArr = array(
-		'x'=>"Projects --->",  // x axis title
-		'y'=>"No. of Story Points --->", // y axis title
-		'm'=>"Projectwise Story Points" // main title
-	);
-	$util = new Application_Model_Util();
-	$fileName = $util->graphFileName('storygraph');
-	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
-	
-?>
-<a name="st" href="#"></a>
-THE BAR GRAPH DEPICTING PROJECT-STORIES MAPPING
-<br /> 
-
-<img src="<?php echo '../tmp/'.$barGrph; ?>" alt="The work begins here...." /> 
-
-
-
-
-
-
-
-<hr/>
-<a name="ln" href="#"></a>
-THE LINE GRAPH DEPICTING PROJECT-STORIES,HRS,DEFECTS MAPPING
-<br /> 
 <?php 
-	$lineDatax=array("Careers Portal","WDW","DCL","DLR");
-	$lineDatay = array(
-		"Stories"=> array("blue",array(28,19,18,23)),
-		"Hours"=> array("red",array(14,18,33,29)),
-		"Defects"=> array("green",array(14,20,15,25))
-	);
-	$lineTitleArr = array( 
-		'm'=>"Projects Line Graph" // main title
-	); // if reqd x and y titles can be set
-	$fileName = $util->graphFileName('linegraph');
-	$lnGrph = $this->drawLineGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
+//echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/graphs.css');
+//echo $this->headScript()->prependFile($this->baseUrl().'/js/graphs.js'); 
+
 ?>
 
-<img src="<?php echo '../tmp/'.$lnGrph; ?>" alt="The work begins here...." />
+<div id="graphFilterContainer">
+		 <div>
+		 	<div class="seeGraph">&nbsp;</div>
+		 	<div class="graphFilterBox graphFilterHead">Projects</div>
+		 	<div class="graphFilterBox graphFilterHead">Releases</div>
+		 	<div class="graphFilterBox graphFilterHead">Graph Type</div>
+		 </div>
+		 <div class="clear-both"></div>
+	  	 <div id="graphFilterBlock">
+    		    <div class="seeGraph">See graph by:</div>
+                <div class="graphFilterBox" id="graphProject">
+                      <select class="selectbox-class" name="lstLocation" id="graphProjectSelect">
+                            <option value="all">All</option>
+                            <?php foreach($this->projectname as $pname):?>
+                            	<option value="<?php echo $pname['dms_projects_id']?>"><?php echo $pname['dms_projects_name']?></option>
+                            <?php endforeach;?>                                               
+                      </select>
+                </div>
+                <div class="graphFilterBox" id="graphRelease">
+                      <select class="selectbox-class" name="graphReleaseSelect" id="graphReleaseSelect">
+                            <option value="all">All</option>
+                            <?php foreach($this->releasename as $rname):?>
+                            	<option value="<?php echo $rname['dms_releases_id']?>"><?php echo $rname['dms_releases_name']?></option>
+                            <?php endforeach;?>                      
+                      </select>
+                </div>
+                <div class="graphFilterBox" id="graphType">
+                      <select class="selectbox-class" name="graphTypeSelect" id="graphTypeSelect">
+                            <?php foreach($this->graphtype as $key=>$value):?>
+                            <option value="<?php echo $key?>"><?php echo $value?></option>
+                            <?php endforeach;?>
+                      </select>
+                </div>
+                <input type="hidden" name="baseUrl" id="baseUrl" value="<?php echo $this->baseUrl();?>" />
+				
+    	 </div>
+</div>
+<br />
+<br />
+
+<a name="st" href="#"></a>
+<div id="graphContainer" class="showgraph">
+
+<img src="<?php echo '../tmp/'.$this->renderGraph; ?>" alt="" />
+</div> 
 
 
 
@@ -50,22 +56,4 @@ THE LINE GRAPH DEPICTING PROJECT-STORIES,HRS,DEFECTS MAPPING
 
 
 
-
-<hr/>
-<a name="hr" href="#"></a>
-THE BAR GRAPH DEPICTING PROJECT-HRS MAPPING
-
-<?php
-	$barDatax=array("Careers Portal","WDW","DCL","DLR");
-	$barDatay=array(30,20,50,35);
-	$barTitleArr = array(
-		'x'=>"Projects --->",  // x axis title
-		'y'=>"No. of Effort Hours --->", // y axis title
-		'm'=>"Projectwise Effort" // main title
-	);
-	$fileName = $util->graphFileName('hoursgraph');
-	$barGrph = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr); 
-?>
-
-<img src="<?php echo '../tmp/'.$barGrph; ?>" alt="The work begins here...." /> 
 

@@ -12,7 +12,8 @@ class Application_Model_Util
 		$authSession = new Application_Model_Auth();
 		$user = $authSession->getAuthName();
 		
-		return $user.'_'.$suffix;
+		//return $user.'_'.$suffix;
+		return $user.'_'.$suffix.'_'.microtime();
 	}
 	
 }
