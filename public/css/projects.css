@@ -1,0 +1,59 @@
+@CHARSET "ISO-8859-1";
+/** CSS for projects section ***/
+
+.projects .widthHead1{
+	width:150px;
+}
+
+.projects .widthHead2{
+	width:170px;
+}
+
+.projects .widthHead3{
+	width:218px;
+}
+
+.projects .widthHead4{
+	width:86px;
+}
+
+.projects .widthHead5{
+	width:150px;
+}
+
+.projects .widthHead6{
+	width:110px;
+}
+
+.projects .widthHead7{
+	width:96px;
+}
+.projects .widthHead8{
+	width:18px;
+}
+
+.projects .width1{
+	width:142px;
+}
+.projects .width2{
+	width:166px;
+}
+.projects .width3{
+	width:202px;
+	margin-right:16px;
+}
+.projects .width4{
+	width:82px;
+}
+.projects .width5{
+	width:142px;
+}
+.projects .width6{
+	width:104px;
+}
+.projects .width7{
+	width:74px;
+}
+.projects .width8{
+	width:16px;
+}

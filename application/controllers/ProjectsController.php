@@ -38,6 +38,7 @@ class ProjectsController extends BaseController {
 		$viewPageItems = new Application_Model_Db_Projects_Mapper();
 		// Pass the id for the particular record to be fetched. If not all the genuine records will be fetched.
 		$this->view->viewPageItems = $viewPageItems->fetchProjects();
+		//var_dump($this->view->viewPageItems );exit;
     }
 
     /**

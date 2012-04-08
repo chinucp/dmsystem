@@ -19,10 +19,15 @@ $(document).ready(function() {
 	
 	$('.viewReleaseInfo').click(function() {
 		var baseUrl = document.getElementById("baseUrl").value;
+		//var l = window.location;
+		//var baseUrl = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1];
+		if(baseUrl.substr(-1)!="/") {
+			baseUrl = baseUrl + "/";
+		}
 		// ajax call and set the details to modal div.
 		$.ajax({
 			  type: 'POST',
-			  url: baseUrl + '/ajax/releasemodal',
+			  url: baseUrl + 'ajax/releasemodal',
 			  data: {releaseid:$(this).attr('id') },
 			  beforeSend:function(){
 				  

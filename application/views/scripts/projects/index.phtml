@@ -2,41 +2,43 @@
 $this->title = "Projects";
 $this->headTitle($this->title);
 ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/projects.css'); ?>
 <div class="subHeaderContainer">
 	<div class="subHeader">View Projects</div>
 </div>
+<div class="projects">
 <div class="table">
 	<div class="rowHead">
-		<div class="colsHead widthLargeHead">Project Name</div>
-		<div class="colsHead widthMediumHead">Project Type</div>
-		<div class="colsHead widthMediumHead"></div>
-		<div class="colsHead widthMediumHead">Start Date</div>
-		<div class="colsHead widthMediumHead">Tentative End date</div>
-		<div class="colsHead widthMediumHead">Status</div>
-		<div class="colsHead widthSmallHead">Action</div>
+		<div class="colsHead widthHead1">Project Name</div>
+		<div class="colsHead widthHead2">Project Type</div>
+		<div class="colsHead widthHead3">Objectives</div>
+		<div class="colsHead widthHead4">Start Date</div>
+		<div class="colsHead widthHead5">Tentative End date</div>
+		<div class="colsHead widthHead6">Status</div>
+		<div class="colsHead widthHead7">Action</div>
+		<div class="colsHead widthHead8"></div>
 	</div>
 	<?php foreach ($this->viewPageItems as $project) : ?>
 	<div class="row" id="row_<?php echo $this->escape($project->dmsProjectsId); ?>">
-		<div class="cols widthLarge">
+		<div class="cols width1">
 			<?php echo $this->escape($project->dmsProjectsName); ?>
 		</div>
-		<div class="cols widthMedium">
+		<div class="cols width2">
 			<?php echo $this->escape($project->dmsProjecttypeName); ?>
 		</div>
-		<div class="cols widthMedium">
-		</div>
-		<div class="cols widthMedium">
+		<div class="cols width3"><?php echo $this->escape($project->dmsProjectsObjectives); ?></div>
+		<div class="cols width4">
 			<?php echo $this->escape($project->dmsProjectsStartDate); ?>
 		</div>
-		<div class="cols widthMedium">
+		<div class="cols width5">
 			<?php echo $this->escape($project->dmsProjectsEndDate); ?>
 		</div>
-		<div class="cols widthMedium"><?php echo $this->escape($project->dmsStatusName);?></div>
-		<div class="colsAction widthSmall">
+		<div class="cols width6"><?php echo $this->escape($project->dmsStatusName);?></div>
+		<div class="colsAction width7">
 			<a href="projects/releases/<?php echo $this->escape($project->dmsProjectsId); ?>">View</a>
 			<a href="projects/edit">Edit</a>
 		</div>
-		<div class="colsAction uiCloseButton widthSmall"></div>
+		<div class="colsAction uiCloseButton width8"></div>
 	</div>
 	<?php endforeach; ?>
 	<br />
@@ -146,5 +148,6 @@ $this->headTitle($this->title);
 		</p>
 	</div>
 	<div class="spacer"></div>
+</div>
 </div>
 <br />
