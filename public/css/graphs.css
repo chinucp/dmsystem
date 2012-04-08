@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+#graphFilterContainer {
+	clear:both;
+	background: none repeat scroll 0 0 #ECECEC;
+    margin-left: 100px;
+    width: 710px;
+    margin-top: 30px;
+}
+#graphFilterBlock {
+    background: url("images/MagicMakersSearchBox_Bg.png") no-repeat scroll 0 0 transparent;
+    height: 32px;
+    width: 700px;
+}
+.clear-both{
+	clear:both;
+}
+.seeGraph {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 14px;
+    margin-top: 7px;
+    width: 100px;
+}
+.graphFilterHead{
+	font-weight:bold;
+}
+.graphFilterBox {
+    float: left;
+    margin-top: 2px;
+    width: 180px;
+}
+#graphFilterContainer select{
+	width:160px;
+}
+#graphType select{
+	width:180px;
+}
+.showgraph{
+    margin: auto;
+    width: 850px;
+    min-height:500px;
+}

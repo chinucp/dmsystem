@@ -7,7 +7,10 @@ class AjaxController extends BaseController {
         // Setting up ajax output, creating its helper object and setting action type.
         $this->ajaxOutput();
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
-        $ajaxContext->addActionContext('index', 'json')->addActionContext('linkedin', 'json')->initContext('json');
+        $ajaxContext->addActionContext('index', 'json')
+        			->addActionContext('releasemodal', 'json')
+        			->addActionContext('generate-graph', 'html')
+        			->initContext('json');
     }
     /**
      *  To disable layout during Ajax Output.
@@ -63,5 +66,16 @@ class AjaxController extends BaseController {
 		                    );
 		echo Zend_Json::encode($moreDetails);
 		//$this->_helper->json($moreDetails);
+    }
+    
+    public function generateGraphAction() {
+    	$this->ajaxOutput();
+    	ob_flush();
+    	$params = $this->_request->getParams();
+    	
+    	$trendGraph = new Application_Model_Db_Graphs_Graph();
+    	echo $trendGraphImg = $trendGraph->drawGraph($params);
+    	//echo Zend_Json::encode($trendGraphImg);
+    	
     }
 }

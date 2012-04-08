@@ -2,15 +2,27 @@
 require_once('BaseController.php');
 class GraphsController extends BaseController
 {
+	private $_grpahModel;
+	private $_mapperModel;
 
 	public function init()
 	{
 		parent::init();
 		Zend_Registry::set('jpgraph',new DMS_Jpgraph_Jpgraph());
+		$this->_graphModel = new Application_Model_Db_Graphs_Graph();
+		$this->_mapperModel = new Application_Model_Db_Graphs_Mapper();
 	}
 
 	public function indexAction()
 	{
+		$this->view->projectname = $this->_mapperModel->fetchProjectNames();
+		$this->view->releasename = $this->_mapperModel->fetchReleaseNames();
+		$this->view->graphtype = $this->_mapperModel->fetchGraphTypes();
+		
+		$params = $this->_request->getParams();
+		ob_flush();		
+	
+		$this->view->renderGraph = $this->_graphModel->drawGraph($params);
 		
 	}
 	
