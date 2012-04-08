@@ -140,7 +140,7 @@ class DMS_Db_Interactions
 		    			$select->orWhere($value["condition"]);
 		    			break;
 		    		case "group":
-		    			$select->group($value["column"]);
+		    			$select->group($value["columns"]);
 		    			break;
 		    		case "order":
 		    			$select->order($value["columns"]);
