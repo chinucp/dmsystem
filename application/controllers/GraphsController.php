@@ -21,7 +21,12 @@ class GraphsController extends BaseController
 		
 		$params = $this->_request->getParams();
 		ob_flush();		
-	
+		
+		$params['gtype'] = isset($params['gtype'])?$params['gtype']:'td';  // show trend graph by default
+		$params['pid'] = isset($params['pid'])?$params['pid']:'all';
+		$params['rid'] = isset($params['rid'])?$params['rid']:'all';
+		$this->view->params = $params;	
+		
 		$this->view->renderGraph = $this->_graphModel->drawGraph($params);
 		
 	}
