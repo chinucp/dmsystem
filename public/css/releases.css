@@ -96,3 +96,7 @@
     font-family: Arial,Verdana,Geneva,sans-serif;
     font-weight: bold;
 }
+
+#graphContainer{
+	display:none;
+}
