@@ -10,6 +10,8 @@ $(document).ready(function() {
 		height: 360,
 		width: 350,
 		modal: true,
+		maxHeight: $(window).height(),
+		maxWidth: $(window).width(),
 		buttons: {
 			Ok: function() {
 				$( this ).dialog( "close" );
@@ -17,10 +19,17 @@ $(document).ready(function() {
 		}
 	});
 	
+	 // Resize the dialog 
+		
 	$('.viewReleaseInfo').click(function() {
+		
+		$("#graphContainer"). hide();
+		$("#dialog-modal").dialog('option', 'height', 360); 
+		$("#dialog-modal").dialog('option', 'width', 350); 
+		$("#dialog-modal").dialog('option', 'position', 'center'); 
+		$("#releaseInfoContainer").show("slow");
+		
 		var baseUrl = document.getElementById("baseUrl").value;
-		//var l = window.location;
-		//var baseUrl = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1];
 		if(baseUrl.substr(-1)!="/") {
 			baseUrl = baseUrl + "/";
 		}
@@ -53,8 +62,56 @@ $(document).ready(function() {
 			    
 			  }
 			});
-		
-		
+	});
+	
+	$("#viewGraph").click(function(){
+
+		// ajax call - get the graph and rsize modal window.
+		$.ajax({
+			  type: 'POST',
+			  url: '/DMS/ajax/releasemodal',
+			  data: {releaseid:2 },
+			  beforeSend:function(){
+				  
+			    // this is where we append a loading image
+			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+			  },
+			  success:function(data){
+				  $("#releaseInfoContainer").hide("slow");
+				  $("#dialog-modal").dialog('option', 'height', 450); 
+				  $("#dialog-modal").dialog('option', 'width', 450); 
+				  $("#dialog-modal").dialog('option', 'position', 'center'); 
+				  $("#graphContainer").show("slow");
+			  },
+			  error:function(){
+			    // failed request; give feedback to user
+			  }
+			});
+	});
+	
+	$("#viewTextDetail").click(function(){
+
+		// ajax call - get the graph and rsize modal window.
+		$.ajax({
+			  type: 'POST',
+			  url: '/DMS/ajax/releasemodal',
+			  data: {releaseid:2 },
+			  beforeSend:function(){
+				  
+			    // this is where we append a loading image
+			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+			  },
+			  success:function(data){
+				  	$("#graphContainer"). hide();
+					$("#dialog-modal").dialog('option', 'height', 360); 
+					$("#dialog-modal").dialog('option', 'width', 350); 
+					$("#dialog-modal").dialog('option', 'position', 'center'); 
+					$("#releaseInfoContainer").show("slow");
+			  },
+			  error:function(){
+			    // failed request; give feedback to user
+			  }
+			});
 	});
 	
 });
