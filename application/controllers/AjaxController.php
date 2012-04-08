@@ -64,18 +64,21 @@ class AjaxController extends BaseController {
                 		        'totalMajorDefects' => $totalMajorDefects,
                 		        'totalNonSpeHours' => $totalNonSpeHours
 		                    );
-		echo Zend_Json::encode($moreDetails);
-		//$this->_helper->json($moreDetails);
+
+		$this->_helper->json($moreDetails);
+		// This started not working !!! Reason no idea !
+		//echo Zend_Json::encode($moreDetails);
+
     }
-    
+
     public function generateGraphAction() {
     	$this->ajaxOutput();
     	ob_flush();
     	$params = $this->_request->getParams();
-    	
+
     	$trendGraph = new Application_Model_Db_Graphs_Graph();
     	echo $trendGraphImg = $trendGraph->drawGraph($params);
     	//echo Zend_Json::encode($trendGraphImg);
-    	
+
     }
 }

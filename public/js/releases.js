@@ -3,12 +3,20 @@ $(document).ready(function() {
 	
 	// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 	$( "#dialog:ui-dialog" ).dialog( "destroy" );
-
+	var modalHeightTextView = 380;
+	var modalWidthTextView = 350;
+	
+	var modalHeightTextView = 450;
+	var modalWidthTextView = 450;
+	
+	var modalHeightGraphView = 450;
+	var modalWidthGraphView = 450;
+	
 	$( "#dialog-modal" ).dialog({
 		autoOpen : false,
 		resizable : false,
-		height: 360,
-		width: 350,
+		height: modalHeightTextView,
+		width: modalWidthTextView,
 		modal: true,
 		maxHeight: $(window).height(),
 		maxWidth: $(window).width(),
@@ -24,8 +32,8 @@ $(document).ready(function() {
 	$('.viewReleaseInfo').click(function() {
 		
 		$("#graphContainer"). hide();
-		$("#dialog-modal").dialog('option', 'height', 360); 
-		$("#dialog-modal").dialog('option', 'width', 350); 
+		$("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
+		$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
 		$("#dialog-modal").dialog('option', 'position', 'center'); 
 		$("#releaseInfoContainer").show("slow");
 		
@@ -44,18 +52,18 @@ $(document).ready(function() {
 			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
 			  },
 			  success:function(data){
-			    // successful request; do something with the data
-				  var obj = jQuery.parseJSON(data);
+				  // successful request; do something with the data
+				  //  var obj = jQuery.parseJSON(data);
 
-				  $('#totalStories').html(obj.totalStories);
-				  $('#totalDevHours').html(obj.totalDevHours);
-				  $('#totalTestHours').html(obj.totalTestHours);
-				  $('#totalReworkHours').html(obj.totalReworkHours);
-				  $('#totalDefects').html(obj.totalDefects);
-				  $('#totalMajorDefects').html(obj.totalMajorDefects);
-				  $('#totalNonSpeHours').html(obj.totalNonSpeHours);
+				  $('#totalStories').html(data.totalStories);
+				  $('#totalDevHours').html(data.totalDevHours);
+				  $('#totalTestHours').html(data.totalTestHours);
+				  $('#totalReworkHours').html(data.totalReworkHours);
+				  $('#totalDefects').html(data.totalDefects);
+				  $('#totalMajorDefects').html(data.totalMajorDefects);
+				  $('#totalNonSpeHours').html(data.totalNonSpeHours);
 				  
-				  $("#dialog-modal").dialog( "open" );
+				  $("#dialog-modal").dialog("open" );
 			  },
 			  error:function(){
 			    // failed request; give feedback to user
@@ -78,8 +86,8 @@ $(document).ready(function() {
 			  },
 			  success:function(data){
 				  $("#releaseInfoContainer").hide("slow");
-				  $("#dialog-modal").dialog('option', 'height', 450); 
-				  $("#dialog-modal").dialog('option', 'width', 450); 
+				  $("#dialog-modal").dialog('option', 'height', modalHeightGraphView); 
+				  $("#dialog-modal").dialog('option', 'width', modalWidthGraphView); 
 				  $("#dialog-modal").dialog('option', 'position', 'center'); 
 				  $("#graphContainer").show("slow");
 			  },
@@ -103,8 +111,8 @@ $(document).ready(function() {
 			  },
 			  success:function(data){
 				  	$("#graphContainer"). hide();
-					$("#dialog-modal").dialog('option', 'height', 360); 
-					$("#dialog-modal").dialog('option', 'width', 350); 
+					$("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
+					$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
 					$("#dialog-modal").dialog('option', 'position', 'center'); 
 					$("#releaseInfoContainer").show("slow");
 			  },

@@ -86,8 +86,13 @@ $this->headTitle($this->title);
 		</div>
 		<?php endforeach; ?>
 		<div id="dialog-modal" title="Release information">
+			<div class="modalToggleLinksContainer">
+    			<span class="modalToggleLinks"><a href="#" id="viewGraph">Graph view</a> </span>
+    			<span class="modalToggleLinks"><a href="#" id="viewTextDetail">Text view</a></span><br />
+			</div>
+
 			<div id="releaseInfoContainer">
-			<a href="#" id="viewGraph">Graph view</a>
+
 				<div class="modal-row"><label>Total Number of Stories: </label><span id="totalStories"></span> </div>
 				<div class="modal-row"><label>Total Dev Hours:</label>	<span id="totalDevHours"></span> </div>
 				<div class="modal-row"><label>Total Test Hours:</label> <span id="totalTestHours"></span></div>
@@ -97,7 +102,7 @@ $this->headTitle($this->title);
 				<div class="modal-row"><label>Total NON SPE hours:</label> <span id="totalNonSpeHours"></span> </div>
 			</div>
 			<div id="graphContainer">
-				<a href="#" id="viewTextDetail">Text view</a>
+
 					graph
 
 			</div>

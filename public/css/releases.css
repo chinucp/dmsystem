@@ -100,3 +100,14 @@
 #graphContainer{
 	display:none;
 }
+
+.modalToggleLinks{
+	width:100px;
+	float:left;
+	
+}
+.modalToggleLinksContainer{
+	margin:8px 0px;
+	border-bottom:1px solid whitesmoke;
+	padding-bottom:1px;
+}
