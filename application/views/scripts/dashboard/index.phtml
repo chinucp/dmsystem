@@ -28,9 +28,9 @@ $this->headTitle($this->title);
                     <h3>Quick Links</h3>
                 </div>
                 <div class="widget-content">
-                    <div class="quicklink"><a href="/graphs#st">Projects Story Reports</a></div>
-                    <div class="quicklink"><a href="/graphs#hr">Projects Hours Reports</a></div>
-                    <div class="quicklink"><a href="/graphs#ln">Projects Trend Reports</a></div>
+                    <div class="quicklink"><a href="<?php echo $this->baseUrl();?>/graphs/?pid=all&rid=all&gtype=st">Projects Story Reports</a></div>
+                    <div class="quicklink"><a href="<?php echo $this->baseUrl();?>/graphs/?pid=all&rid=all&gtype=hr">Projects Hours Reports</a></div>
+                    <div class="quicklink"><a href="<?php echo $this->baseUrl();?>/graphs/?pid=all&rid=all&gtype=td">Projects Trend Reports</a></div>
                 </div>
             </li>
         </ul>
@@ -55,6 +55,7 @@ $this->headTitle($this->title);
 
 						<?php foreach ($this->projects as $project):?>
 						 <div class="row" id="row_<?php echo $this->escape($project->dmsProjectsId);?>">
+						 	<?php $graphView = $this->baseUrl()."/graphs/?pid=".$this->escape($project->dmsProjectsId)."&rid=".$this->escape($project->dmsReleasesId)."&gtype=td"?>
 							<div class="cols widthLargeHead"><?php echo $this->escape($project->dmsProjectsName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsProjecttypeName);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsReleasesName);?></div>
@@ -62,6 +63,7 @@ $this->headTitle($this->title);
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsStartDate);?></div>
 							<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsEndDate);?></div>
 							<div class="colsAction "><a href="<?php echo $this->baseUrl()."/projects/releases/".$this->escape($project->dmsProjectsId);?>">View</a></div>
+							<div class="colsAction "><a href="<?php echo $graphView?>">Graph View</a></div>
 						</div>
 						<?php endforeach;?>
 						<?php if(empty($this->projects)):?>
