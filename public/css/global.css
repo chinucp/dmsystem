@@ -334,7 +334,7 @@ select {
 	font-size: 14px;
 	font-weight: normal;
 	min-height: 15px;
-	padding: 12px 0;
+	padding: 12px 0 8px 0px;
 	text-align: center;
 }
 
@@ -343,7 +343,7 @@ select {
     font-size: 12px;
     font-weight: normal;
     min-height: 16px;
-    padding: 22px 2px 8px;
+    padding: 18px 2px 8px;
     text-align: left;
 }
 
@@ -392,6 +392,7 @@ select {
 	zoom: 1;
 	-webkit-background-clip: padding-box;
 	border: 1px solid transparent;
+	display:none;
 }
 
 .row {

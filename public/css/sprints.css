@@ -4,3 +4,82 @@
 a.hours_tip, a.defects_tip{
 	text-decoration:none;
 }
+
+.sprintsTable .width1 {
+	width: 160px;
+}
+.sprintsTable .width2 {
+	width: 122px;
+}
+.sprintsTable .width3 {
+	width: 122px;
+}
+
+.sprintsTable .width4 {
+    margin-right: 20px;
+    width: 170px;
+}
+
+.sprintsTable .width5 {
+	width: 110px;
+	margin-right:8px;
+}
+
+.sprintsTable .width6 {
+	width: 82px;
+	margin-right:3px;
+}
+
+.sprintsTable .width7 {
+	width: 96px;
+}
+
+.sprintsTable .width8 {
+	width: 60px;
+}
+
+.sprintsTable .cols{
+	padding:20px 2px 6px;
+}
+
+.sprintsTable .colsHead{
+	padding:0px 2px 2px 0px;
+}
+
+.sprintsTable .widthHead1 {
+    width: 163px;
+}
+
+.sprintsTable .widthHead2 {
+    width: 126px;
+}
+
+.sprintsTable .widthHead3{
+	width:122px;
+}
+
+.sprintsTable .widthHead4{
+	width:150px;
+}
+
+.sprintsTable .widthHead5{
+	width:142px;
+}
+
+.sprintsTable .widthHead6{
+	width:120px;
+}
+
+.sprintsTable .widthHead7 {
+    float: left;
+    margin-right: 10px;
+    width: 72px;
+}
+
+.sprintsTable .widthHead8{
+	width:46px;
+}
+
+.sprintsTable .colsAction{
+	font-size:12px;
+}
