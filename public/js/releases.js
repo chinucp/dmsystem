@@ -6,11 +6,16 @@ $(document).ready(function() {
 	var modalHeightTextView = 380;
 	var modalWidthTextView = 350;
 	
-	var modalHeightTextView = 450;
-	var modalWidthTextView = 450;
+	//var modalHeightTextView = 450;
+	//var modalWidthTextView = 450;
 	
-	var modalHeightGraphView = 450;
-	var modalWidthGraphView = 450;
+	var modalHeightGraphView = 600;
+	var modalWidthGraphView = 700;
+	
+	var baseUrl = document.getElementById("baseUrl").value;
+	if(baseUrl.substr(-1)!="/") {
+		baseUrl = baseUrl + "/";
+	}
 	
 	$( "#dialog-modal" ).dialog({
 		autoOpen : false,
@@ -36,11 +41,8 @@ $(document).ready(function() {
 		$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
 		$("#dialog-modal").dialog('option', 'position', 'center'); 
 		$("#releaseInfoContainer").show("slow");
+		id = $(this).attr('id');
 		
-		var baseUrl = document.getElementById("baseUrl").value;
-		if(baseUrl.substr(-1)!="/") {
-			baseUrl = baseUrl + "/";
-		}
 		// ajax call and set the details to modal div.
 		$.ajax({
 			  type: 'POST',
@@ -73,12 +75,14 @@ $(document).ready(function() {
 	});
 	
 	$("#viewGraph").click(function(){
-
+		var imgWidth = parseInt(modalWidthGraphView) - 60;
+		var imgHeight = parseInt(modalHeightGraphView)- 150;
+		
 		// ajax call - get the graph and rsize modal window.
 		$.ajax({
 			  type: 'POST',
-			  url: '/DMS/ajax/releasemodal',
-			  data: {releaseid:2 },
+			  url: baseUrl + 'ajax/generate-graph',
+			  data: {rid:id},
 			  beforeSend:function(){
 				  
 			    // this is where we append a loading image
@@ -89,6 +93,13 @@ $(document).ready(function() {
 				  $("#dialog-modal").dialog('option', 'height', modalHeightGraphView); 
 				  $("#dialog-modal").dialog('option', 'width', modalWidthGraphView); 
 				  $("#dialog-modal").dialog('option', 'position', 'center'); 
+				  var graphContainerHtml = "<div class='modalGraphImg'><img src='"+ 
+				  					baseUrl + 
+				  					"tmp/" + data.graph+"' width='" + 
+				  					imgWidth + "' height='" + 
+				  					imgHeight + "'/></div>";
+				  
+				  $("#graphContainer").html(graphContainerHtml);
 				  $("#graphContainer").show("slow");
 			  },
 			  error:function(){
@@ -98,12 +109,12 @@ $(document).ready(function() {
 	});
 	
 	$("#viewTextDetail").click(function(){
-
+		
 		// ajax call - get the graph and rsize modal window.
 		$.ajax({
 			  type: 'POST',
-			  url: '/DMS/ajax/releasemodal',
-			  data: {releaseid:2 },
+			  url: baseUrl + 'ajax/releasemodal',
+			  data: {rid: id },
 			  beforeSend:function(){
 				  
 			    // this is where we append a loading image
