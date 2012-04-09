@@ -26,16 +26,31 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 
 	public function drawStory($projectId,$releaseId){
 		$result = $this->_mapper->fetchStoryGraphDetails($projectId,$releaseId);
+		if($projectId!='all' && $releaseId=='all'){
+			$name = 'dmsReleasesName';
+			$titleX = 'Release';
+		}else if($projectId!='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			$titleX = 'Sprint';
+		}else if( $projectId=='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			$titleX = 'Sprint';
+		}else{
+			$name = 'dmsProjectsName';
+			$titleX = 'Project';
+		}
+		
 		foreach($result as $arrAxis){
-			$barDatax[] = $arrAxis->dmsProjectsName;
+			$barDatax[] = $arrAxis->$name;
 			$barDatay[] = $arrAxis->storypoints;
 		}
+		//echo '<pre>';print_r($barDatax);print_r($barDatay);
 		//$barDatax=array("Careers Portal","WDW","DCL","DLR");
 		//$barDatay=array(120,300,90,75);
 		$barTitleArr = array(
-				'x'=>"Projects --->",  // x axis title
+				'x'=>$titleX."s-->",  // x axis title
 				'y'=>"No. of Story Points --->", // y axis title
-				'm'=>"Projectwise Story Points" // main title
+				'm'=>$titleX." wise Story Points" // main title
 		);
 		
 		$fileName = $this->_util->graphFileName('storygraph');
@@ -44,11 +59,29 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 	
 	public function drawTrend($projectId,$releaseId){
 		$result = $this->_mapper->fetchTrendGraphDetails($projectId,$releaseId);
+		if($projectId!='all' && $releaseId=='all'){
+			$name = 'dmsReleasesName';
+			//$titleX = 'Release';
+		}else if($projectId!='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			//$titleX = 'Sprint';
+		}else if( $projectId=='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			//$titleX = 'Sprint';
+		}else{
+			$name = 'dmsProjectsName';
+			//$titleX = 'Project';
+		}
+		
 		$lineDatay['Stories'][0] = 'blue';
 		$lineDatay['Hours'][0] = 'red';
 		$lineDatay['Defects'][0]= 'green';
+		$lineDatay['Stories'][1][] = 0;
+		$lineDatay['Hours'][1][] = 0;
+		$lineDatay['Defects'][1][] = 0;
+		$lineDatax[] = '';
 		foreach($result as $arrAxis){
-			$lineDatax[] = $arrAxis->dmsProjectsName;
+			$lineDatax[] = $arrAxis->$name;
 			$lineDatay['Stories'][1][] = $arrAxis->storypoints;
 			$lineDatay['Hours'][1][] = $arrAxis->hoursWorked;
 			$lineDatay['Defects'][1][] = $arrAxis->defects;
@@ -71,19 +104,34 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 	
 	public function drawHour($projectId,$releaseId){
 		$result = $this->_mapper->fetchHourGraphDetails($projectId,$releaseId);
+		if($projectId!='all' && $releaseId=='all'){
+			$name = 'dmsReleasesName';
+			$titleX = 'Release';
+		}else if($projectId!='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			$titleX = 'Sprint';
+		}else if( $projectId=='all' && $releaseId!='all'){
+			$name ='dmsSprintsName';
+			$titleX = 'Sprint';
+		}else{
+			$name = 'dmsProjectsName';
+			$titleX = 'Project';
+		}
 		foreach($result as $arrAxis){
-			$barDatax[] = $arrAxis->dmsProjectsName;
+			$barDatax[] = $arrAxis->$name;
 			$barDatay[] = $arrAxis->hoursWorked;
 		}
 		$barTitleArr = array(
-				'x'=>"Projects --->",  // x axis title
+				'x'=>$titleX."s-->",  // x axis title
 				'y'=>"No. of Hours --->", // y axis title
-				'm'=>"Projectwise Hours" // main title
+				'm'=>$titleX." wise Hours" // main title
 		);
 		$util = new Application_Model_Util();
 		$fileName = $this->_util->graphFileName('hourgraph');
 		return  $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr);
 	}
+	
+	
 	public function drawGraph($params=array()){
 		
 		$graphType = isset($params['gtype'])?$params['gtype']:'td';  // show trend graph by default

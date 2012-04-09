@@ -34,7 +34,6 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 		$db = Zend_Db_Table::getDefaultAdapter();
 		$resultant = $db->query($sql);
 		$resultSet = $resultant->fetchAll();
-		//echo '<pre>';print_r($resultSet);echo '</pre>';die;
 		return $resultSet;
 	}
 	public function fetchProjectNames(){	
@@ -50,10 +49,24 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 				FROM dms_releases AS R 
 				INNER JOIN dms_projects AS P ON P.`dms_projects_id` = R.dms_releases_projects_id'
 				;
-		if($projectId){
+		if(!empty($projectId) and 'all'!=$projectId){
 			$sql.= ' WHERE R.dms_releases_projects_id='.$projectId;
 		}
-		return $this->fetchall($sql);
+		return $this->fetchall($sql); 
+		
+		/* $query = array("from" => array("tableName" => array('p' => 'dms_projects'),
+											"colsToBFetched" => array("p.dms_projects_name")
+				),
+				"innerJoin#1" => array("tableName" => array("r" => "dms_releases"),
+						"condition" => "p.dms_projects_id = r.dms_releases_projects_id",
+						"columns" => array("r.dms_releases_id","r.dms_releases_name")
+				)
+		);
+		if(!empty($projectId) and 'all'!=$projectId){
+			$query["where"] = array("condition" => "r.dms_releases_projects_id  = " . $projectId);
+		}
+		$this->formQuery($query);
+		return $this->getDisplayItems(); */
 	
 	}
 	public function fetchGraphTypes(){
@@ -91,17 +104,30 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 				"innerJoin#3" => array("tableName" => array("sl" => "dms_sprints_log"),
 						"condition" => "s.dms_sprints_id = sl.dms_sprintslog_sprints_id",
 						"columns" => array("sum(sl.dms_sprintslog_storypoints) as storypoints",
-								"sum( SL.dms_sprintslog_storypoints ) AS storypoints")
+								"sum( sl.dms_sprintslog_storypoints ) AS storypoints")
 		
 				)
 		);
+		$grpFlag= 'all';
+		$appendCondition = '';
 		if (!empty($projectId) && 'all' != strtolower($projectId)) {
 			$query["where"] = array("condition" => "R.dms_releases_projects_id = " . $projectId);
+			$grpFlag = 'release';
 		}
 		if (!empty($releaseId) && 'all' != strtolower($releaseId)) {
-			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId);
+			if (!empty($projectId) && 'all' != strtolower($projectId)){
+				$appendCondition = " AND R.dms_releases_projects_id = " . $projectId;
+			}
+			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId.$appendCondition);
+			$grpFlag ='sprint';
 		}
-		$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		if($grpFlag=='release'){
+			$query["group"] = array("columns" => array("r.dms_releases_id"));
+		}else if($grpFlag=='sprint'){
+			$query["group"] = array("columns" => array("s.dms_sprints_id"));
+		}else{
+			$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		}
 		$this->formQuery($query);
 		return $this->getDisplayItems();
 	
@@ -137,13 +163,28 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 						
 				)
 		);
+		
+		$grpFlag= 'all';
+		$appendCondition = '';
 		if (!empty($projectId) && 'all' != strtolower($projectId)) {
 			$query["where"] = array("condition" => "R.dms_releases_projects_id = " . $projectId);
+			$grpFlag = 'release';
 		}
 		if (!empty($releaseId) && 'all' != strtolower($releaseId)) {
-			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId);
+			if (!empty($projectId) && 'all' != strtolower($projectId)){
+				$appendCondition = " AND R.dms_releases_projects_id = " . $projectId;
+			}
+			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId.$appendCondition);
+			$grpFlag ='sprint';
 		}
-		$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		if($grpFlag=='release'){
+			$query["group"] = array("columns" => array("r.dms_releases_id"));
+		}else if($grpFlag=='sprint'){
+			$query["group"] = array("columns" => array("s.dms_sprints_id"));
+		}else{
+			$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		}
+		
 		$this->formQuery($query);
 		return $this->getDisplayItems();
 	}
@@ -175,17 +216,33 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 				"innerJoin#3" => array("tableName" => array("sl" => "dms_sprints_log"),
 						"condition" => "s.dms_sprints_id = sl.dms_sprintslog_sprints_id",
 						"columns" => array("sum(sl.dms_sprintslog_storypoints) as storypoints",
-								"sum(SL.dms_sprintslog_dev)+sum(SL.dms_sprintslog_test)+sum(SL.dms_sprintslog_reworkdev)+sum(SL.dms_sprintslog_reworktest)+sum(SL.dms_sprintslog_nonspe) as hours_worked")
+								"sum(sl.dms_sprintslog_dev)+sum(sl.dms_sprintslog_test)+sum(sl.dms_sprintslog_reworkdev)+sum(sl.dms_sprintslog_reworktest)+sum(sl.dms_sprintslog_nonspe) as hours_worked")
 		
 				)
 		);
+		
+		
+		$grpFlag= 'all';
+		$appendCondition = '';
 		if (!empty($projectId) && 'all' != strtolower($projectId)) {
 			$query["where"] = array("condition" => "R.dms_releases_projects_id = " . $projectId);
+			$grpFlag = 'release';
 		}
 		if (!empty($releaseId) && 'all' != strtolower($releaseId)) {
-			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId);
+			if (!empty($projectId) && 'all' != strtolower($projectId)){
+				$appendCondition = " AND R.dms_releases_projects_id = " . $projectId;
+			}
+			$query["where"] = array("condition" => "R.dms_releases_id  = " . $releaseId.$appendCondition);
+			$grpFlag ='sprint';
 		}
-		$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		if($grpFlag=='release'){
+			$query["group"] = array("columns" => array("r.dms_releases_id"));
+		}else if($grpFlag=='sprint'){
+			$query["group"] = array("columns" => array("s.dms_sprints_id"));
+		}else{
+			$query["group"] = array("columns" => array("r.dms_releases_projects_id"));
+		}
+		
 		$this->formQuery($query);
 		return $this->getDisplayItems();
 	
