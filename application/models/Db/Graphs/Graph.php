@@ -76,13 +76,9 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 			//$titleX = 'Project';
 		}
 
-		$lineDatay['Story Points'][0] = 'blue';
-		$lineDatay['Hours'][0] = 'red';
-		$lineDatay['Defects'][0]= 'green';
-		$lineDatay['Story Points'][1][] = 0;
-		$lineDatay['Hours'][1][] = 0;
-		$lineDatay['Defects'][1][] = 0;
-		$lineDatax[] = '';
+		$lineDatay['Story Points'][0] = '#808000';
+		$lineDatay['Hours'][0] = '#00CED1';
+		$lineDatay['Defects'][0]= '#C71585';
 		foreach($result as $arrAxis){
 			$lineDatax[] = $arrAxis->$name;
 			$lineDatay['Story Points'][1][] = $arrAxis->storypoints;
