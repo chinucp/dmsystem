@@ -87,13 +87,14 @@ $this->headTitle($this->title);
 		<?php endforeach; ?>
 		<div id="dialog-modal" title="Release information">
 			<div class="modalToggleLinksContainer">
-    			<span class="modalToggleLinks"><a href="#" id="viewGraph">Graph view</a> </span>
-    			<span class="modalToggleLinks"><a href="#" id="viewTextDetail">Text view</a></span><br />
+    			<span class="modalToggleLinks"><a href="#" id="viewTextDetail">Text View</a></span>
+    			<span class="modalToggleLinks"><a href="#" id="viewGraph">Graph View</a> </span><br />
 			</div>
 
 			<div id="releaseInfoContainer">
-
+				<div class="modal-header"><?php echo $this->escape($release->dmsReleasesName); ?>: Overview</div>
 				<div class="modal-row"><label>Total Number of Stories: </label><span id="totalStories"></span> </div>
+				<div class="modal-row"><label>Total Story Points:</label><span id="totalStoryPoints"></span> </div>
 				<div class="modal-row"><label>Total Dev Hours:</label>	<span id="totalDevHours"></span> </div>
 				<div class="modal-row"><label>Total Test Hours:</label> <span id="totalTestHours"></span></div>
 				<div class="modal-row"><label>Total Rework Hours (Dev + Test):</label> <span id="totalReworkHours"></span> </div>

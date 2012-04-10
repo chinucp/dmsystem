@@ -28,6 +28,7 @@ class AjaxController extends BaseController {
         //$this->view->linkHtml = $this->view->partial('');
 
         $totalStories = 0;
+        $totalStoryPoints = 0;
 		$totalDevHours = 0;
 		$totalTestHours = 0;
 		$totalReworkHoursDev = 0;
@@ -46,6 +47,7 @@ class AjaxController extends BaseController {
 
 		foreach ($result as $sprints){
 		       $totalStories = $totalStories + $sprints->dmsSprintslogStories;
+		       $totalStoryPoints = $totalStoryPoints + $sprints->dmsSprintslogStorypoints;
 		       $totalDevHours = $totalDevHours + $sprints->dmsSprintslogDev;
 		       $totalTestHours = $totalTestHours + $sprints->dmsSprintslogTest;
 		       $totalReworkHoursDev = $totalReworkHoursDev + $sprints->dmsSprintslogReworkdev;
@@ -58,6 +60,7 @@ class AjaxController extends BaseController {
 		}
 
 		$moreDetails = array(	'totalStories' => $totalStories,
+								'totalStoryPoints' => $totalStoryPoints,
                 		        'totalDevHours' => $totalDevHours,
                 		        'totalTestHours' => $totalTestHours,
                 		        'totalReworkHours' => $totalReworkHours,
@@ -79,12 +82,12 @@ class AjaxController extends BaseController {
     	$graph = new Application_Model_Db_Graphs_Graph();
     	$this->_helper->json($graph->drawGraph($params));
     }
-    
+
     public function filterDashboardProjectsAction(){
     	$this->ajaxOutput();
     	$params = $this->_request->getParams();
     	$proshowtype = isset($params['proshowtype'])?$params['proshowtype']:'cm';
-    
+
     	$dashboard = new Application_Model_Db_Dashboard_Mapper();
     	$projects  = $dashboard->fetchProjects('',$proshowtype);
     	//echo '<pre>';print_r($projects);die;

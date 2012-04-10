@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$(this).simpletip({
 			content : $("#defects_tooltip_" + sprId[2]).html(),
 			fixed : true,
-			position : [ "-200", "-185" ]
+			position : [ "-200", "-180" ]
 		});
 	});
 	
@@ -18,7 +18,7 @@ $(document).ready(function() {
 		$(this).simpletip({
 			content : $("#hours_tooltip_" + sprId[2]).html(),
 			fixed : true,
-			position : [ "-200", "-240" ]
+			position : [ "-200", "-235" ]
 		});
 	});
 	

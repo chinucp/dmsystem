@@ -3,14 +3,14 @@ $(document).ready(function() {
 	
 	// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 	$( "#dialog:ui-dialog" ).dialog( "destroy" );
-	var modalHeightTextView = 550;
-	var modalWidthTextView = 550;
+	var modalHeightTextView = 560;
+	var modalWidthTextView = 560;
 	
 	//var modalHeightTextView = 450;
 	//var modalWidthTextView = 450;
 	
-	var modalHeightGraphView = 550;
-	var modalWidthGraphView = 550;
+	var modalHeightGraphView = 560;
+	var modalWidthGraphView = 560;
 	
 	var baseUrl = document.getElementById("baseUrl").value;
 	if(baseUrl.substr(-1)!="/") {
@@ -32,6 +32,10 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('.ui-dialog-titlebar-close').click(function(){
+		$("#graphContainer").hide();
+		$("#releaseInfoContainer").show();
+	});
 	 // Resize the dialog 
 		
 	$('.viewReleaseInfo').click(function() {
@@ -58,6 +62,7 @@ $(document).ready(function() {
 				  //  var obj = jQuery.parseJSON(data);
 
 				  $('#totalStories').html(data.totalStories);
+				  $('#totalStoryPoints').html(data.totalStoryPoints);
 				  $('#totalDevHours').html(data.totalDevHours);
 				  $('#totalTestHours').html(data.totalTestHours);
 				  $('#totalReworkHours').html(data.totalReworkHours);
@@ -76,7 +81,7 @@ $(document).ready(function() {
 	
 	$("#viewGraph").click(function(){
 		var imgWidth = parseInt(modalWidthGraphView) - 60;
-		var imgHeight = parseInt(modalHeightGraphView)- 150;
+		var imgHeight = parseInt(modalHeightGraphView)- 180;
 		
 		// ajax call - get the graph and rsize modal window.
 		$.ajax({
@@ -99,7 +104,7 @@ $(document).ready(function() {
 				  					"tmp/" + data.graph+"' width='" + 
 				  					imgWidth + "' height='" + 
 				  					imgHeight + "'/></div>";
-				  setTimeout(function() {$("#graphContainer").html(graphContainerHtml).fadeIn()} , 1000);
+				  setTimeout(function() {$("#graphContainer").html(graphContainerHtml).fadeIn();} , 1000);
 				  
 			  },
 			  error:function(){
@@ -121,12 +126,13 @@ $(document).ready(function() {
 			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
 			  },
 			  success:function(data){
-				  	$("#graphContainer"). fadeOut();
-					$("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
-					$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
-					$("#dialog-modal").dialog('option', 'position', 'center'); 
+				  $("#graphContainer").fadeOut(800).hide();
+				  $("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
+				  $("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
+				  $("#dialog-modal").dialog('option', 'position', 'center'); 
 					
 				  $('#totalStories').html(data.totalStories);
+				  $('#totalStoryPoints').html(data.totalStoryPoints);
 				  $('#totalDevHours').html(data.totalDevHours);
 				  $('#totalTestHours').html(data.totalTestHours);
 				  $('#totalReworkHours').html(data.totalReworkHours);
@@ -134,7 +140,10 @@ $(document).ready(function() {
 				  $('#totalMajorDefects').html(data.totalMajorDefects);
 				  $('#totalNonSpeHours').html(data.totalNonSpeHours);
 				  
-					$("#releaseInfoContainer").fadeIn();
+				  $("#releaseInfoContainer").fadeIn(800).show();
+			  },
+			  complete:function(){
+				  
 			  },
 			  error:function(){
 			    // failed request; give feedback to user
