@@ -23,7 +23,7 @@ echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/global.css')
 ?>
 </head>
 <body>
-	<div id="container">
+	<div id="container" class="wrapper">
 		<div id="header">
 			<h2>Delivery Management System</h2>
 			<div class="rightBlock"></div>
@@ -34,7 +34,9 @@ echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/global.css')
 		<div id="homeContent">
 			<?php echo $this->layout()->content; ?>
 		</div>
-		<div id="footer">Copyright 2012 - Accenture. All Rights Reserved.</div>
+		<div class="push"></div>
 	</div>
+	<div class="footer"><p>Copyright 2012 - Accenture. All Rights Reserved.</p></div>
+	
 </body>
 </html>

@@ -37,7 +37,8 @@ h1,h2,h3,h4,h5,blockquote,q {
 }
 
 html,body {
-	position: absolute;
+	/*position: absolute;*/
+	height: 100%;
 }
 
 html,body {
@@ -98,8 +99,14 @@ ul {
 	background: url(../images/content_bg.png) repeat-y;
 	width: 1025px;
 	margin: 0 auto;
-	display: table;
+	/*display: table;
 	height: 100%;
+	*/
+	min-height: 92%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -4em;
+	padding-bottom:65px;
 }
 
 #header {
@@ -156,8 +163,9 @@ ul {
 	padding: 3px 20px;
 	position: relative;
 	width: 982px;
+	
 }
-
+/*
 #footer {
 	border-top: 1px solid #EBEBEB;
 	bottom: 0;
@@ -169,6 +177,28 @@ ul {
 	position: relative;
 	text-align: right;
 	width: 983px;
+}
+*/
+.footer {
+	border-top: 1px solid #EBEBEB;	
+	position: relative;
+	width: 1025px;
+	margin: 0 auto;
+	bottom:16px;
+}
+.push{
+	clear:both;
+}
+
+.footer p {
+	position: absolute;
+	font-size: 11px;
+	width: 300px;
+	text-align: right;
+	margin-top: 16px;
+	float: left;
+	right: 16px;
+	
 }
 
 ul {
@@ -777,4 +807,3 @@ select {
 .form-field input#startDate, .form-field input#endDate{
 	width:176px;
 }
-
