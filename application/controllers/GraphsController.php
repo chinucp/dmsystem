@@ -16,7 +16,7 @@ class GraphsController extends BaseController
 	public function indexAction()
 	{
 		$this->view->projectname = $this->_mapperModel->fetchProjectNames();
-		$this->view->releasename = $this->_mapperModel->fetchReleaseNames();
+		$this->view->releasename = (object) array();
 		$this->view->graphtype = $this->_mapperModel->fetchGraphTypes();
 
 		$params = $this->_request->getParams();
@@ -28,7 +28,7 @@ class GraphsController extends BaseController
 		$this->view->params = $params;
 
 		$resultGraph = $this->_graphModel->drawGraph($params);
-		echo $this->view->renderGraph = $resultGraph['graph'];
+		$this->view->renderGraph = $resultGraph['graph'];
 	}
 
 	public function barchartAction()
