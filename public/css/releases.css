@@ -4,10 +4,10 @@
 	width:150px;
 }
 .releaseTable .width2 {
-	width: 90px;
+	width: 96px;
 }
 .releaseTable .width3 {
-	width: 90px;
+	width: 98px;
 }
 
 .releaseTable .width4 {
@@ -16,17 +16,17 @@
 }
 
 .releaseTable .width5 {
-	width: 124px;
+	width: 135px;
 	margin-right:8px;
 }
 
 .releaseTable .width6 {
-	width: 84px;
+	width: 74px;
 	margin-right:3px;
 }
 
 .releaseTable .width7 {
-	width: 86px;
+	width: 70px;
 }
 
 .releaseTable .width8 {
@@ -34,7 +34,7 @@
 }
 
 .releaseTable .cols{
-	padding:20px 2px 8px;
+	padding:20px 2px 6px;
 }
 
 .releaseTable .colsHead{
@@ -46,23 +46,23 @@
 }
 
 .releaseTable .widthHead2 {
-    width: 92px;
+    width: 100px;
 }
 
 .releaseTable .widthHead3{
-	width:92px;
+	width:100px;
 }
 
 .releaseTable .widthHead4{
-	width:244px;
+	width:241px;
 }
 
 .releaseTable .widthHead5{
-	width:134px;
+	width:142px;
 }
 
 .releaseTable .widthHead6{
-	width:88px;
+	width:120px;
 }
 
 .releaseTable .widthHead7 {
@@ -110,4 +110,8 @@
 	margin:8px 0px;
 	border-bottom:1px solid whitesmoke;
 	padding-bottom:1px;
+}
+
+.modalGraphImg{
+	margin:6px;
 }

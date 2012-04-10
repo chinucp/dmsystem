@@ -58,10 +58,10 @@ $this->headTitle($this->title);
 	<div id="sviewInfo">
 		<div class="rowHead">
 			<div class="colsHead widthHead1">Release Name</div>
-			<div class="colsHead widthHead2">Start Date</div>
-			<div class="colsHead widthHead3">End Date</div>
 			<div class="colsHead widthHead4">Objectives</div>
 			<div class="colsHead widthHead5">Risks</div>
+			<div class="colsHead widthHead2">Start Date</div>
+			<div class="colsHead widthHead3">End Date</div>
 			<div class="colsHead widthHead6">Status</div>
 			<div class="colsHead widthHead7">Actions</div>
 			<div class="colsHead widthHead8"></div>
@@ -74,12 +74,12 @@ $this->headTitle($this->title);
 			<div class="cols width1">
 				<?php echo $this->escape($release->dmsReleasesName); ?>
 			</div>
+			<div class="cols width4"><?php echo $this->escape($release->dmsReleasesObjectives);?></div>
+			<div class="cols width5"><?php echo $this->escape($release->dmsReleasesRiskinfo);?></div>
 			<div class="cols width2">
 				<?php echo $this->escape($release->dmsReleasesStartDate); ?>
 			</div>
 			<div class="cols width3"><?php echo $this->escape($release->dmsReleasesEndDate); ?></div>
-			<div class="cols width4"><?php echo $this->escape($release->dmsReleasesObjectives);?></div>
-			<div class="cols width5"><?php echo $this->escape($release->dmsReleasesRiskinfo);?></div>
 			<div class="cols width6"><?php echo ($this->escape($release->dmsReleasesActive))?"Active":"Inactive";?></div>
 			<div class="colsAction width7"><a href="#" class="viewReleaseInfo" id="<?php echo $this->escape($release->dmsReleasesId);?>" title="View More Release details">View more</a></div>
 			<div class="colsAction width8"><a href="<?php echo $this->baseUrl()."/projects/releases/sprints/".$release->dmsReleasesId;?>">View Sprints</a></div>

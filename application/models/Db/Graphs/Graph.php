@@ -9,7 +9,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 	protected $_jpgraph;
 	protected $_util;
 	protected $_mapper;
-	
+
 	/**
 	 * @name Constructor
 	 * @access public
@@ -25,6 +25,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 	}
 
 	public function drawStory($projectId,$releaseId){
+	    $responseData['releases'] = $this->_mapper->fetchReleaseNames($projectId);
 		$result = $this->_mapper->fetchStoryGraphDetails($projectId,$releaseId);
 		if($projectId!='all' && $releaseId=='all'){
 			$name = 'dmsReleasesName';
@@ -39,7 +40,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 			$name = 'dmsProjectsName';
 			$titleX = 'Project';
 		}
-		
+
 		foreach($result as $arrAxis){
 			$barDatax[] = $arrAxis->$name;
 			$barDatay[] = $arrAxis->storypoints;
@@ -52,12 +53,14 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 				'y'=>"No. of Story Points --->", // y axis title
 				'm'=>$titleX." wise Story Points" // main title
 		);
-		
+
 		$fileName = $this->_util->graphFileName('storygraph');
-		return  $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr);
+		$responseData['graph'] = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr);
+		return $responseData;
 	}
-	
+
 	public function drawTrend($projectId,$releaseId){
+	    $responseData['releases'] = $this->_mapper->fetchReleaseNames($projectId);
 		$result = $this->_mapper->fetchTrendGraphDetails($projectId,$releaseId);
 		if($projectId!='all' && $releaseId=='all'){
 			$name = 'dmsReleasesName';
@@ -72,7 +75,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 			$name = 'dmsProjectsName';
 			//$titleX = 'Project';
 		}
-		
+
 		$lineDatay['Stories'][0] = 'blue';
 		$lineDatay['Hours'][0] = 'red';
 		$lineDatay['Defects'][0]= 'green';
@@ -86,23 +89,25 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 			$lineDatay['Hours'][1][] = $arrAxis->hoursWorked;
 			$lineDatay['Defects'][1][] = $arrAxis->defects;
 		}
-		
+
 		/* $lineDatax=array("Careers Portal","WDW","DCL","DLR");
 		$lineDatay = array(
 				"Stories"=> array("blue",array(28,19,18,23)),
 				"Hours"=> array("red",array(14,18,33,29)),
 				"Defects"=> array("green",array(14,20,15,25))
 		); */
-		
-	
+
+
 		$lineTitleArr = array(
 				'm'=>"Projects Trend Graph" // main title
 		); // if reqd x and y titles can be set
 		$fileName = $this->_util->graphFileName('trendgraph');
-		return  $this->drawTrendGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
+		$responseData['graph'] = $this->drawTrendGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
+		return $responseData;
 	}
-	
+
 	public function drawHour($projectId,$releaseId){
+	    $responseData['releases'] = $this->_mapper->fetchReleaseNames($projectId);
 		$result = $this->_mapper->fetchHourGraphDetails($projectId,$releaseId);
 		if($projectId!='all' && $releaseId=='all'){
 			$name = 'dmsReleasesName';
@@ -128,12 +133,13 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 		);
 		$util = new Application_Model_Util();
 		$fileName = $this->_util->graphFileName('hourgraph');
-		return  $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr);
+		$responseData['graph'] = $this->drawBarGraph($fileName,$barDatax,$barDatay,$barTitleArr);
+		return $responseData;
 	}
-	
-	
+
+
 	public function drawGraph($params=array()){
-		
+
 		$graphType = isset($params['gtype'])?$params['gtype']:'td';  // show trend graph by default
 		$projectId = isset($params['pid'])?$params['pid']:'all';
 		$releaseId = isset($params['rid'])?$params['rid']:'all';

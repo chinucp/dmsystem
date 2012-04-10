@@ -75,10 +75,7 @@ class AjaxController extends BaseController {
     	$this->ajaxOutput();
     	ob_flush();
     	$params = $this->_request->getParams();
-
-    	$trendGraph = new Application_Model_Db_Graphs_Graph();
-    	echo $trendGraphImg = $trendGraph->drawGraph($params);
-    	//echo Zend_Json::encode($trendGraphImg);
-
+    	$graph = new Application_Model_Db_Graphs_Graph();
+    	$this->_helper->json($graph->drawGraph($params));
     }
 }

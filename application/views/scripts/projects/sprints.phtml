@@ -15,18 +15,19 @@ $this->headTitle($this->title);
 <div id="rviewInfo" class="table">
 
 </div>
-<div class="releaseTable">
+<div class="sprintsTable">
 
 	<div id="sviewInfo">
 		<div class="rowHead">
 			<div class="colsHead widthHead1">Sprint Name</div>
 			<div class="colsHead widthHead2">Start Date</div>
 			<div class="colsHead widthHead3">End Date</div>
-			<div class="colsHead widthHead4">Stories/Tasks #</div>
-			<div class="colsHead widthHead5">Defects #</div>
-			<div class="colsHead widthHead6">Hours</div>
-			<div class="colsHead widthHead7">Status</div>
-			<div class="colsHead widthHead8"></div>
+			<div class="colsHead widthHead4">Cut-off Date</div>
+			<div class="colsHead widthHead5">Stories/Tasks #</div>
+			<div class="colsHead widthHead6">Defects #</div>
+			<div class="colsHead widthHead7">Hours</div>
+			<div class="colsHead widthHead8">Status</div>
+			<!-- <div class="colsHead widthHead9"></div> -->
 		</div>
 
 
@@ -44,8 +45,9 @@ $this->headTitle($this->title);
 				<?php echo $this->escape($sprint->dmsSprintsStartDate); ?>
 			</div>
 			<div class="cols width3"><?php echo $this->escape($sprint->dmsSprintsEndDate); ?></div>
-			<div class="cols width4"><?php echo $this->escape($sprint->dmsSprintslogStories);?></div>
-			<div class="cols width5">
+			<div class="cols width4"><?php echo $this->escape($sprint->dmsSprintsCutoffDate); ?></div>
+			<div class="cols width5"><?php echo $this->escape($sprint->dmsSprintslogStories);?></div>
+			<div class="cols width6">
 				<a href="#" class="defects_tip" id="defects_tip_<?php echo $this->escape($sprint->dmsSprintsId); ?>" >
 				    <?php echo $this->escape($sprint->dmsSprintslogMajordefects)+
 				            $this->escape($sprint->dmsSprintslogMinordefects) ;?>
@@ -57,7 +59,7 @@ $this->headTitle($this->title);
 				</a>
 
 			</div>
-			<div class="cols width6">
+			<div class="cols width7">
 			<a href="#" class="hours_tip" id="hours_tip_<?php echo $this->escape($sprint->dmsSprintsId); ?>" >
 				<?php echo $this->escape($sprint->dmsSprintslogDev) +
 				        $this->escape($sprint->dmsSprintslogTest) +
@@ -83,8 +85,8 @@ $this->headTitle($this->title);
 
 			</a>
 			</div>
-			<div class="colsAction width7"><?php echo ($this->escape($sprint->dmsSprintsActive))?"Active":"Inactive"?></div>
-			<div class="colsAction width8"><a href="#">Delete</a></div>
+			<div class="colsAction width8"><?php echo ($this->escape($sprint->dmsSprintsActive))?"Active":"Inactive"?></div>
+			<!-- <div class="colsAction width9"><a href="#">Delete</a></div> -->
 		</div>
 		<?php endforeach; ?>
 

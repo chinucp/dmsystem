@@ -13,7 +13,7 @@ $this->headTitle($this->title);
 		<div class="colsHead widthHead2">Project Type</div>
 		<div class="colsHead widthHead3">Objectives</div>
 		<div class="colsHead widthHead4">Start Date</div>
-		<div class="colsHead widthHead5">Tentative End date</div>
+		<div class="colsHead widthHead5">End date</div>
 		<div class="colsHead widthHead6">Status</div>
 		<div class="colsHead widthHead7">Action</div>
 		<div class="colsHead widthHead8"></div>
@@ -36,7 +36,7 @@ $this->headTitle($this->title);
 		<div class="cols width6"><?php echo $this->escape($project->dmsStatusName);?></div>
 		<div class="colsAction width7">
 			<a href="projects/releases/<?php echo $this->escape($project->dmsProjectsId); ?>">View</a>
-			<a href="projects/edit">Edit</a>
+			<!-- <a href="projects/edit">Edit</a>-->
 		</div>
 		<div class="colsAction uiCloseButton width8"></div>
 	</div>
@@ -44,8 +44,7 @@ $this->headTitle($this->title);
 	<br />
 
 	<div class="buttonContainer">
-		<input type="button" class="blueButton" name="addProjectButton"
-			id="addProjectButton" value="Add Project" />
+		<!-- <input type="button" class="blueButton" name="addProjectButton" id="addProjectButton" value="Add Project" />  -->
 	</div>
 
 	<!--
