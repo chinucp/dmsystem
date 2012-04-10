@@ -13,7 +13,7 @@ class Application_Model_Util
 		$user = $authSession->getAuthName();
 		
 		//return $user.'_'.$suffix;
-		return $user.'_'.$suffix.'_'.microtime();
+		return $user.'_'.$suffix.'_'.strtotime("now");
 	}
 	
 }

@@ -1,0 +1,20 @@
+<?php foreach ($this->projects as $project):?>
+ <div class="row" id="row_<?php echo $this->escape($project->dmsProjectsId);?>">
+ 	<?php $graphView = $this->baseUrl()."/graphs/?pid=".$this->escape($project->dmsProjectsId)."&rid=".$this->escape($project->dmsReleasesId)."&gtype=td"?>
+	<div class="cols widthLargeHead"><?php echo $this->escape($project->dmsProjectsName);?></div>
+	<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsProjecttypeName);?></div>
+	<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsReleasesName);?></div>
+	<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsName);?></div>
+	<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsStartDate);?></div>
+	<div class="cols widthMediumHead"><?php echo $this->escape($project->dmsSprintsEndDate);?></div>
+	<div class="colsAction "><a href="<?php echo $this->baseUrl()."/projects/releases/".$this->escape($project->dmsProjectsId);?>">View</a></div>
+	<div class="colsAction "><a href="<?php echo $graphView?>">Graph View</a></div>
+</div>
+<?php endforeach;?>
+<?php if(empty($this->projects)):?>
+	<div class="elementContainer">No records available</div>
+<?php endif;?>
+						
+
+
+

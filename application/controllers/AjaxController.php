@@ -10,6 +10,7 @@ class AjaxController extends BaseController {
         $ajaxContext->addActionContext('index', 'json')
         			->addActionContext('releasemodal', 'json')
         			->addActionContext('generate-graph', 'html')
+        			->addActionContext('filter-dashboard-projects', 'html')
         			->initContext('json');
     }
     /**
@@ -77,5 +78,17 @@ class AjaxController extends BaseController {
     	$params = $this->_request->getParams();
     	$graph = new Application_Model_Db_Graphs_Graph();
     	$this->_helper->json($graph->drawGraph($params));
+    }
+    
+    public function filterDashboardProjectsAction(){
+    	$this->ajaxOutput();
+    	$params = $this->_request->getParams();
+    	$proshowtype = isset($params['proshowtype'])?$params['proshowtype']:'cm';
+    
+    	$dashboard = new Application_Model_Db_Dashboard_Mapper();
+    	$projects  = $dashboard->fetchProjects('',$proshowtype);
+    	//echo '<pre>';print_r($projects);die;
+    	$this->view->projects  = $projects;
+    	$this->render('dashboard/records','',true);
     }
 }
