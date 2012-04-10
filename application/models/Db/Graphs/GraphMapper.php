@@ -52,7 +52,9 @@ class Application_Model_Db_Graphs_GraphMapper extends Zend_View_Helper_Abstract
 		$bplot->SetColor("white");
 		//$bplot->SetLegend('Projects');
 		$jpgraph->Add($bplot);
-	
+		$bplot->value->SetFormat('%d');
+		$bplot->value->Show();
+		$bplot->value->SetColor("black");
 		$jpgraph->yaxis->SetTitleMargin(40);
 		$jpgraph->xaxis->SetTitleMargin(30);
 		if(!empty($titleArr['x'])) $jpgraph->xaxis->title->Set($titleArr['x']);
@@ -85,7 +87,7 @@ class Application_Model_Db_Graphs_GraphMapper extends Zend_View_Helper_Abstract
 		$jpgraph->SetBox(true);
 	
 		$jpgraph->img->SetAntiAliasing("white");
-		$jpgraph->SetScale("textlin");
+		$jpgraph->SetScale('intlin',0,0);
 	
 		// Use built in font
 		$jpgraph->title->SetFont(FF_FONT1,FS_BOLD);
@@ -96,16 +98,20 @@ class Application_Model_Db_Graphs_GraphMapper extends Zend_View_Helper_Abstract
 			$line->mark->SetType(MARK_FILLEDCIRCLE);
 			$line->mark->SetFillColor($datayVal[0]);
 			$line->mark->SetWidth(5);
-			$line->SetColor($datayVal[0]);
 			$line->SetCenter();
 			$line->SetLegend($datayKey);
 			$jpgraph->Add($line);
+			$line->SetColor($datayVal[0]);
+			$line->value->SetFormat('%d');
+			$line->value->Show();
+			$line->value->SetColor($datayVal[0]);
 		}
 	
 		// Output line
 		$jpgraph->xaxis->SetTickLabels($datax);
 		$jpgraph->legend->SetMarkAbsSize(6);
-	
+		$jpgraph->yscale->SetAutoMin(0);
+		$jpgraph->xscale->SetAutoMin(0);
 		if(!empty($titleArr['x'])) $jpgraph->xaxis->title->Set($titleArr['x']);
 		if(!empty($titleArr['y'])) $jpgraph->yaxis->title->Set($titleArr['y']);
 		$title = $titleArr['m'];

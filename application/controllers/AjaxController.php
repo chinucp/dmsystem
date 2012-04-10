@@ -38,7 +38,7 @@ class AjaxController extends BaseController {
 		$totalDefects = 0;
 		$totalNonSpeHours = 0;
 
-        $releaseId = $this->_request->getParam('releaseid');
+        $releaseId = $this->_request->getParam('rid');
 
         $viewPageItems = new Application_Model_Db_Projects_Mapper();
 		// Must Pass the id(releases id) for the particular record(s) to be fetched.

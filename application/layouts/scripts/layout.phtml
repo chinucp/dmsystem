@@ -30,7 +30,7 @@ echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/graphs.css')
 ?>
 </head>
 <body>
-	<div id="container" class="shadow">
+	<div id="container" class="wrapper">
 		<div id="header">
 			<h2>Delivery Management System</h2>
 		</div>
@@ -44,7 +44,8 @@ echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/graphs.css')
 			<?php echo $this->layout()->content; ?>
 			<div id="push"></div>
 		</div>
-		<div id="footer">Copyright 2012 - Accenture. All Rights Reserved.</div>
+		<div class="push"></div>
 	</div>
+	<div class="footer"><p>Copyright 2012 - Accenture. All Rights Reserved.</p></div>
 </body>
 </html>

@@ -3,14 +3,14 @@ $(document).ready(function() {
 	
 	// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 	$( "#dialog:ui-dialog" ).dialog( "destroy" );
-	var modalHeightTextView = 380;
-	var modalWidthTextView = 350;
+	var modalHeightTextView = 550;
+	var modalWidthTextView = 550;
 	
 	//var modalHeightTextView = 450;
 	//var modalWidthTextView = 450;
 	
-	var modalHeightGraphView = 600;
-	var modalWidthGraphView = 700;
+	var modalHeightGraphView = 550;
+	var modalWidthGraphView = 550;
 	
 	var baseUrl = document.getElementById("baseUrl").value;
 	if(baseUrl.substr(-1)!="/") {
@@ -36,18 +36,18 @@ $(document).ready(function() {
 		
 	$('.viewReleaseInfo').click(function() {
 		
-		$("#graphContainer"). hide();
+		$("#graphContainer").fadeOut();
 		$("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
 		$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
 		$("#dialog-modal").dialog('option', 'position', 'center'); 
-		$("#releaseInfoContainer").show("slow");
+		$("#releaseInfoContainer").fadeIn();
 		id = $(this).attr('id');
 		
 		// ajax call and set the details to modal div.
 		$.ajax({
 			  type: 'POST',
 			  url: baseUrl + 'ajax/releasemodal',
-			  data: {releaseid:$(this).attr('id') },
+			  data: {rid:$(this).attr('id') },
 			  beforeSend:function(){
 				  
 			    // this is where we append a loading image
@@ -89,18 +89,18 @@ $(document).ready(function() {
 			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
 			  },
 			  success:function(data){
-				  $("#releaseInfoContainer").hide("slow");
+				 
 				  $("#dialog-modal").dialog('option', 'height', modalHeightGraphView); 
 				  $("#dialog-modal").dialog('option', 'width', modalWidthGraphView); 
 				  $("#dialog-modal").dialog('option', 'position', 'center'); 
-				  var graphContainerHtml = "<div class='modalGraphImg'><img src='"+ 
+				  $("#releaseInfoContainer").fadeOut();
+				  var graphContainerHtml = "<div class='modalGraphImg'><img id='graph' src='"+ 
 				  					baseUrl + 
 				  					"tmp/" + data.graph+"' width='" + 
 				  					imgWidth + "' height='" + 
 				  					imgHeight + "'/></div>";
+				  setTimeout(function() {$("#graphContainer").html(graphContainerHtml).fadeIn()} , 1000);
 				  
-				  $("#graphContainer").html(graphContainerHtml);
-				  $("#graphContainer").show("slow");
 			  },
 			  error:function(){
 			    // failed request; give feedback to user
@@ -121,11 +121,20 @@ $(document).ready(function() {
 			    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
 			  },
 			  success:function(data){
-				  	$("#graphContainer"). hide();
+				  	$("#graphContainer"). fadeOut();
 					$("#dialog-modal").dialog('option', 'height', modalHeightTextView); 
 					$("#dialog-modal").dialog('option', 'width', modalWidthTextView); 
 					$("#dialog-modal").dialog('option', 'position', 'center'); 
-					$("#releaseInfoContainer").show("slow");
+					
+				  $('#totalStories').html(data.totalStories);
+				  $('#totalDevHours').html(data.totalDevHours);
+				  $('#totalTestHours').html(data.totalTestHours);
+				  $('#totalReworkHours').html(data.totalReworkHours);
+				  $('#totalDefects').html(data.totalDefects);
+				  $('#totalMajorDefects').html(data.totalMajorDefects);
+				  $('#totalNonSpeHours').html(data.totalNonSpeHours);
+				  
+					$("#releaseInfoContainer").fadeIn();
 			  },
 			  error:function(){
 			    // failed request; give feedback to user

@@ -20,7 +20,6 @@ require_once('gd_image.inc.php');
 require_once('jpgraph_line.php');
 require_once('jpgraph_bar.php');
 
-
 class DMS_Jpgraph_Jpgraph
 {
 	
@@ -150,7 +149,7 @@ class DMS_Jpgraph_Jpgraph
 
 		
 	// Useful mathematical function
-	function sign($a) {return $a >= 0 ? 1 : -1;}
+	static function sign($a) {return $a >= 0 ? 1 : -1;}
 	
 	//
 	// Utility function to generate an image name based on the filename we
@@ -5106,7 +5105,8 @@ class LinearScale {
 // CLASS DisplayValue
 // Description: Used to print data values at data points
 //===================================================
-class DisplayValue {
+class DisplayValue extends DMS_Jpgraph_Jpgraph
+{
     public $margin=5;
     public $show=false;
     public $valign='',$halign='center';
@@ -5205,8 +5205,7 @@ class DisplayValue {
             else {
                 $sval=$aVal;
             }
-
-            $y = $y-sign($aVal)*$this->margin;
+            $y = $y-self::sign($aVal)*$this->margin;
 
             $this->txt->Set($sval);
             $this->txt->SetPos($x,$y);
