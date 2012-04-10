@@ -51,7 +51,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 		$barTitleArr = array(
 				'x'=>$titleX."s-->",  // x axis title
 				'y'=>"No. of Story Points --->", // y axis title
-				'm'=>$titleX." wise Story Points" // main title
+				'm'=>"Story Points" // main title
 		);
 
 		$fileName = $this->_util->graphFileName('storygraph');
@@ -76,16 +76,16 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 			//$titleX = 'Project';
 		}
 
-		$lineDatay['Stories'][0] = 'blue';
+		$lineDatay['Story Points'][0] = 'blue';
 		$lineDatay['Hours'][0] = 'red';
 		$lineDatay['Defects'][0]= 'green';
-		$lineDatay['Stories'][1][] = 0;
+		$lineDatay['Story Points'][1][] = 0;
 		$lineDatay['Hours'][1][] = 0;
 		$lineDatay['Defects'][1][] = 0;
 		$lineDatax[] = '';
 		foreach($result as $arrAxis){
 			$lineDatax[] = $arrAxis->$name;
-			$lineDatay['Stories'][1][] = $arrAxis->storypoints;
+			$lineDatay['Story Points'][1][] = $arrAxis->storypoints;
 			$lineDatay['Hours'][1][] = $arrAxis->hoursWorked;
 			$lineDatay['Defects'][1][] = $arrAxis->defects;
 		}
@@ -99,7 +99,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 
 
 		$lineTitleArr = array(
-				'm'=>"Projects Trend Graph" // main title
+				'm'=>"Trend Graph" // main title
 		); // if reqd x and y titles can be set
 		$fileName = $this->_util->graphFileName('trendgraph');
 		$responseData['graph'] = $this->drawTrendGraph($fileName,$lineDatax,$lineDatay,$lineTitleArr);
@@ -129,7 +129,7 @@ class Application_Model_Db_Graphs_Graph extends Application_Model_Db_Graphs_Grap
 		$barTitleArr = array(
 				'x'=>$titleX."s-->",  // x axis title
 				'y'=>"No. of Hours --->", // y axis title
-				'm'=>$titleX." wise Hours" // main title
+				'm'=>"Hours" // main title
 		);
 		$util = new Application_Model_Util();
 		$fileName = $this->_util->graphFileName('hourgraph');

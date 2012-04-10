@@ -47,7 +47,11 @@ a {color:white;}
     float: left;
     width: 100%;
 }
-
+.ulrow{
+	clear: left;
+    color: #565669;
+    overflow: auto;
+}
 /* Column dividers (background-images) : */
 	/* #columns #column1 { background: url(../images/column-bg-left.png) no-repeat right top; }
 	#columns #column3 { background: url(../images/column-bg-right.png) no-repeat left top; } */
