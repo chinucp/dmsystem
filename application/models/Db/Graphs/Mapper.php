@@ -38,23 +38,32 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 	}
 	public function fetchProjectNames(){	
 	
-		$sql = 'SELECT dms_projects_id, dms_projects_name
+		/*$sql = 'SELECT dms_projects_id, dms_projects_name
 				FROM dms_projects';
-		return $this->fetchall($sql);
+		return $this->fetchall($sql);*/
+		
+		$query = array("from" => array("tableName" => array('p' => 'dms_projects'),
+				"colsToBFetched" => array("p.dms_projects_id","p.dms_projects_name")
+								)		
+				);
+		$this->formQuery($query);
+		$resultSet = $this->fetchData();
+		$this->getDisplayItems();
+		return $resultSet->toArray();
 	
 	}
 	public function fetchReleaseNames($projectId=0){
 	
-		$sql = 'SELECT dms_releases_id, dms_releases_name
+		/* $sql = 'SELECT dms_releases_id, dms_releases_name
 				FROM dms_releases AS R 
 				INNER JOIN dms_projects AS P ON P.`dms_projects_id` = R.dms_releases_projects_id'
 				;
 		if(!empty($projectId) and 'all'!=$projectId){
 			$sql.= ' WHERE R.dms_releases_projects_id='.$projectId;
 		}
-		return $this->fetchall($sql); 
+		return $this->fetchall($sql); */ 
 		
-		/* $query = array("from" => array("tableName" => array('p' => 'dms_projects'),
+		$query = array("from" => array("tableName" => array('p' => 'dms_projects'),
 											"colsToBFetched" => array("p.dms_projects_name")
 				),
 				"innerJoin#1" => array("tableName" => array("r" => "dms_releases"),
@@ -62,18 +71,25 @@ class Application_Model_Db_Graphs_Mapper extends DMS_Db_Interactions
 						"columns" => array("r.dms_releases_id","r.dms_releases_name")
 				)
 		);
+		
 		if(!empty($projectId) and 'all'!=$projectId){
-			$query["where"] = array("condition" => "r.dms_releases_projects_id  = " . $projectId);
+			$query["where"] = array("condition" => "r.dms_releases_projects_id  = " . $projectId. " AND r.dms_releases_status_id !=3 AND r.dms_releases_status_id !=5" );
+		}else{
+			return;
+			$query["where"] = array("condition" => "r.dms_releases_status_id !=3 AND r.dms_releases_status_id !=5");
 		}
+				
 		$this->formQuery($query);
-		return $this->getDisplayItems(); */
+		$resultSet = $this->fetchData();
+		$this->getDisplayItems();
+		return $resultSet->toArray();
 	
 	}
 	public function fetchGraphTypes(){
 	
-		$graphType = array( 'td'=>'Projects Trend Reports',
-							'st'=>'Projects Story Reports',
-							'hr'=>'Projects Hours Reports',
+		$graphType = array( 'td'=>'Trend Reports',
+							'st'=>'Story Reports',
+							'hr'=>'Hours Reports',
 							);
 		return $graphType;
 	

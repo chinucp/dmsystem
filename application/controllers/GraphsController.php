@@ -15,17 +15,23 @@ class GraphsController extends BaseController
 
 	public function indexAction()
 	{
-		$this->view->projectname = $this->_mapperModel->fetchProjectNames();
-		$this->view->releasename = (object) array();
-		$this->view->graphtype = $this->_mapperModel->fetchGraphTypes();
-
+		$pid= '';
 		$params = $this->_request->getParams();
 		ob_flush();
-
+		
 		$params['gtype'] = isset($params['gtype'])?$params['gtype']:'td';  // show trend graph by default
 		$params['pid'] = isset($params['pid'])?$params['pid']:'all';
 		$params['rid'] = isset($params['rid'])?$params['rid']:'all';
 		$this->view->params = $params;
+		
+		if('all' != $params['pid']){
+			$pid = $params['pid'];
+		}
+		
+		$this->view->projectname = $this->_mapperModel->fetchProjectNames();
+		$this->view->releasename = $this->_mapperModel->fetchReleaseNames($pid);
+		$this->view->graphtype = $this->_mapperModel->fetchGraphTypes();
+
 
 		$resultGraph = $this->_graphModel->drawGraph($params);
 		$this->view->renderGraph = $resultGraph['graph'];
