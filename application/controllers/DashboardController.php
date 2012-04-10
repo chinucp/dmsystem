@@ -11,6 +11,7 @@ class DashboardController extends BaseController {
 		$dashboard = new Application_Model_Db_Dashboard_Mapper();
         $projects  = $dashboard->fetchProjects();
 
+        $this->view->projectViewType = $dashboard->fetchProjectViewType();
         $this->view->projects  = $projects;
     }
 

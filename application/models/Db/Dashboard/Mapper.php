@@ -31,13 +31,30 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
 	}
 
 	/**
+	 * @desc fetch the last current and next future sprint details
+	 * @access public
+	 * @param void
+	 * @return void
+	 */
+	public function fetchProjectViewType(){
+	
+		$projectViewType = array( 'cm'=>'Current Milestone',
+				'pm'=>'Past Milestone',
+				'um'=>'Upcoming MileStone',
+		);
+		return $projectViewType;
+	
+	}
+	
+	
+	/**
 	 * @name fetchProjects
 	 * @access public
 	 *
 	 * @param $projectId|int|default null
 	 * This method fetches all the items to be displayed in projects view page.
 	 */
-	public function fetchProjects($projectId = null)
+	public function fetchProjects($projectId = null,$proshowtype='cm')
 	{
 		$query = array("from" => array("tableName" => array('p' => 'dms_projects'),
     		"colsToBFetched" => array("p.dms_projects_id",
@@ -61,13 +78,24 @@ class Application_Model_Db_Dashboard_Mapper extends DMS_Db_Interactions
     			"columns" => array("pt.dms_projecttype_name","pt.dms_projecttype_alias")
     		)
     	);
-    	$query["where"] = array("condition" => "now( )
+		if($proshowtype == 'pm'){
+			$query["where"] = array("condition" => "s.dms_sprints_status_id = 2");
+			$query["order"] = array("columns" => array("s.dms_sprints_start_date DESC"));
+		}else if($proshowtype == 'um'){
+			$query["where"] = array("condition" => "s.dms_sprints_status_id = 3");
+			$query["order"] = array("columns" => array("s.dms_sprints_start_date ASC"));
+			
+		}else{  // for current milestone default
+    		$query["where"] = array("condition" => "now( )
 					BETWEEN S.dms_sprints_start_date
 					AND S.dms_sprints_end_date");
+    		$query["order"] = array("columns" => array("s.dms_sprints_start_date ASC"));
+		}
     	if (!empty($projectId)) {
-    			$query["where"] = array("condition" => "p.dms_projects_id = " . $projectId);
+    			$query["where"] = array("condition" => "p.dms_projects_id = " . $projectId);   			
+    			
     	}
-    	$query["order"] = array("columns" => array("p.dms_projects_name ASC"));
+    	
     	$this->formQuery($query);
 		return $this->getDisplayItems();
     }

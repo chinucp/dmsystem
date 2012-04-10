@@ -201,3 +201,35 @@ var iNettuts = {
 };
 
 iNettuts.init();
+
+$(document).ready(function() {
+	// Give this as empty string if required.
+		
+	
+	$('.dashboard-selectbox').change(function() {
+		var baseUrl = document.getElementById("baseUrl").value;
+		
+		// ajax call and set the details to modal div.
+		var requestData =  {proshowtype:$('#dashboardProjectSelect').val()};
+		$.ajax({
+			url : baseUrl + '/ajax/filter-dashboard-projects',
+			data:requestData,
+			type : 'post',
+			beforeSend: function() {
+				$('#graphContainer').html('Processing...Please Wait...');
+				//$('#changePassMsg').removeClass().html(ajaxProcessMsg);
+			},
+			success : function(data) {
+				
+				$('#recordContent').html(data);
+			},
+			error : function() {
+				$('#recordContent').html('<div class="elementContainer">No records available</div>');
+			}
+
+		});
+		
+		
+	});
+	
+});
